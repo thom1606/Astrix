@@ -1,5 +1,5 @@
 <!-- markdownlint-disable-next-line first-line-heading -->
-![Banner](./assets/readme-banner.png)
+![Banner](./assets/astrix-readme-banner.png)
 
 Welcome to **Astrix**! Your one-stop solution for easy finder management. This project is meant to help you improve your productivity by providing a simple and easy-to-use finder tool that helps you get into development faster.
 
