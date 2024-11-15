@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Cocoa
+import FinderSync
 
 struct OnboardingStepFinal: View {
     func handleComplete() {
@@ -13,14 +15,35 @@ struct OnboardingStepFinal: View {
     }
 
     var body: some View {
-        VStack {
-            Spacer()
-            Text("Let's go")
-            Text("You are all ready to get going with Astrix!")
-            Button(action: handleComplete) {
-                Text("Let's go")
+        VStack(alignment: .leading) {
+            ZStack {
+                Spacer()
+                    .frame(maxWidth: .infinity)
+                if #available(macOS 15.0, *) {
+                    Image(systemName: "play.fill")
+                        .font(.system(size: 160, weight: .semibold))
+                        .padding(.bottom, 64)
+                        .symbolEffect(.wiggle.byLayer, options: .repeating)
+                } else {
+                    Image(systemName: "play.fill")
+                        .font(.system(size: 160, weight: .semibold))
+                        .padding(.bottom, 64)
+                }
             }
+            Text("Ready to Start?")
+                .foregroundStyle(Color(NSColor.labelColor))
+                .font(.system(size: 19, weight: .semibold))
+                .padding(.bottom, 3)
+            Text("You are all set to begin your journey with Astrix! Try adding Astrix to your Finder toolbar and enjoy a more streamlined workflow.")
+                .foregroundStyle(Color(NSColor.secondaryLabelColor))
+                .font(.system(size: 19, weight: .regular))
+                .padding(.bottom, 20)
+            Button(action: handleComplete) {
+                Text("Let's go!")
+            }
+            .buttonStyle(MainButtonStyle())
         }
+        .frame(maxWidth: .infinity)
     }
 }
 

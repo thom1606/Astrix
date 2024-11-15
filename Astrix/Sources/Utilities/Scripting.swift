@@ -7,6 +7,7 @@
 
 import Foundation
 import Carbon
+import Cocoa
 
 class Scripting {
     public static let shared = Scripting()
@@ -78,5 +79,29 @@ class Scripting {
         event.setDescriptor(NSAppleEventDescriptor(string: functionName), forKeyword: AEKeyword(keyASSubroutineName))
         event.setDescriptor(parameters, forKeyword: AEKeyword(keyDirectObject))
         return event
+    }
+
+    private func isAppInstalled(bundleIdentifier: String) -> Bool {
+        let workspace = NSWorkspace.shared
+        return workspace.urlForApplication(withBundleIdentifier: bundleIdentifier) != nil
+    }
+
+    public func getFirstInstalledEditor() -> SupportedApps {
+        let editors: [SupportedApps] = [.vsCodeInsiders, .vsCode, .xcode, .none]
+        for editor in editors {
+            if isAppInstalled(bundleIdentifier: editor.rawValue) {
+                return editor
+            }
+        }
+        return .none
+    }
+    public func getFirstInstalledTerminal() -> SupportedApps {
+        let terminals: [SupportedApps] = [.iTerm, .terminal]
+        for terminal in terminals {
+            if isAppInstalled(bundleIdentifier: terminal.rawValue) {
+                return terminal
+            }
+        }
+        return .terminal
     }
 }

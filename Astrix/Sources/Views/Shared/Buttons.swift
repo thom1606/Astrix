@@ -82,6 +82,8 @@ struct RoundButtonStyle: ButtonStyle {
 struct MainButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled: Bool
     var size: Sizes = .medium
+    var errored: Bool = false
+    var fullWidth: Bool = false
     @State private var isHovered = false
 
     var finalSize: CGFloat {
@@ -102,6 +104,7 @@ struct MainButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(height: finalSize)
+            .frame(maxWidth: fullWidth ? .infinity : nil)
             .padding(.horizontal, horizontalPadding)
             .background(
                 ZStack {
@@ -111,6 +114,11 @@ struct MainButtonStyle: ButtonStyle {
                     RoundedRectangle(cornerRadius: 500)
                         .fill(Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.18))
                         .blendMode(.colorDodge)
+                    if errored {
+                        RoundedRectangle(cornerRadius: 500)
+                            .fill(.red.opacity(0.3))
+                            .blendMode(.plusDarker)
+                    }
                     Rectangle()
                         .fill(
                             RadialGradient(
@@ -150,6 +158,7 @@ struct MainButtonStyle: ButtonStyle {
             .foregroundColor(isEnabled ? Color(NSColor.labelColor) : Color(NSColor.tertiaryLabelColor))
             .clipShape(RoundedRectangle(cornerRadius: 500))
             .font(.system(size: fontSize, weight: .medium))
+            .shake(enabled: errored)
             .onHover { hovering in
                 isHovered = hovering
             }

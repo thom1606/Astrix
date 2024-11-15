@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingStepWelcome: View {
+    @Binding var pageSelection: Int
     @State private var hasSetup = false
 
     var title: String {
@@ -21,17 +22,40 @@ struct OnboardingStepWelcome: View {
     }
 
     func load() {
+        let dispatchGroup = DispatchGroup()
+
+        // Enter the dispatch group for the script update
+        dispatchGroup.enter()
         do {
             try Scripting.shared.updateSystemScripts()
-            // TODO: also setup the default AppStorage values here
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                withAnimation {
-                    hasSetup = true
-                }
-            }
+
+            // Leave the dispatch group after the script update is done
+            dispatchGroup.leave()
         } catch {
-            // TODO: handle errors and wait before allowing the user to click the button
+            // Handle errors and leave the dispatch group
+            dispatchGroup.leave()
         }
+        
+        // Enter the dispatch group for the minimum delay
+        dispatchGroup.enter()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            dispatchGroup.leave()
+        }
+        
+        // Notify when both tasks are complete
+        dispatchGroup.notify(queue: .main) {
+            withAnimation {
+                hasSetup = true
+            }
+        }
+    }
+
+    func handleNext() {
+        let userDefaults = UserDefaults(suiteName: "group.com.thom1606.Astrix")
+        userDefaults?.set(Scripting.shared.getFirstInstalledTerminal().rawValue, forKey: "defaultTerminal")
+        userDefaults?.set(Scripting.shared.getFirstInstalledEditor().rawValue, forKey: "defaultEditor")
+
+        pageSelection += 1
     }
 
     var body: some View {
@@ -43,19 +67,19 @@ struct OnboardingStepWelcome: View {
                     if hasSetup {
                         Image(systemName: "hand.wave.fill")
                             .font(.system(size: 160, weight: .semibold))
-                            .padding(.bottom, 42)
+                            .padding(.bottom, 64)
                             .symbolEffect(.wiggle, options: .repeating)
                     } else {
                         Image(systemName: "clock.fill")
                             .font(.system(size: 160, weight: .semibold))
-                            .padding(.bottom, 42)
+                            .padding(.bottom, 64)
                             .symbolEffect(.rotate.clockwise.byLayer, options: .repeating)
 
                     }
                 } else {
                     Image(systemName: "clock.fill")
                         .font(.system(size: 160, weight: .semibold))
-                        .padding(.bottom, 42)
+                        .padding(.bottom, 64)
                 }
             }
             Text(title)
@@ -70,10 +94,7 @@ struct OnboardingStepWelcome: View {
                 .animation(.snappy, value: description)
                 .contentTransition(.numericText(countsDown: true))
                 .padding(.bottom, 20)
-            NavigationLink {
-                OnboardingStepNotifications()
-                    .navigationBarBackButtonHidden(true)
-            } label: {
+            Button(action: handleNext) {
                 Text("Get started")
             }.disabled(!hasSetup)
                 .buttonStyle(MainButtonStyle())
@@ -85,6 +106,6 @@ struct OnboardingStepWelcome: View {
 
 #Preview {
     NavigationStack {
-        OnboardingStepWelcome()
+        OnboardingStepWelcome(pageSelection: .constant(0))
     }
 }

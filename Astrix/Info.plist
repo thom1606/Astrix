@@ -7,5 +7,7 @@
 		<key>CFBundleIconFiles</key>
 		<string>AppIcon</string>
 	</dict>
+	<key>NSAppGroupsUsageDescription</key>
+	<string>We need access to shared data to provide a seamless experience across our apps.</string>
 </dict>
 </plist>

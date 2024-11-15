@@ -12,12 +12,11 @@ struct ContentView: View {
 
     var body: some View {
         ZStack {
-            Onboarding()
-//            if onboardingCompleted {
-//                MainView()
-//            } else {
-//                Onboarding()
-//            }
+            if onboardingCompleted {
+                MainView()
+            } else {
+                Onboarding()
+            }
         }
     }
 }

@@ -31,6 +31,8 @@ class Utilities {
     static func openApp (bundleId: SupportedApps) -> Bool {
         guard var url = Utilities.getSelectedPathsFromFinder().first else { return false }
 
+        if bundleId == .none { return false }
+
         // check the path is directory or not
         var isDirectory: ObjCBool = false
         guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) else { return false }

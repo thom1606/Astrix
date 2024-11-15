@@ -16,7 +16,7 @@ struct Constants {
         static let ToolsFileName = "tools";
         static let ToolsFileExtension = "scpt";
         static let SupportedEditorApplications: [(SupportedApps, String)] = [
-            (.textEdit, "TextEdit"),
+            (.none, "None"),
             (.xcode, "XCode"),
             (.vsCode, "Visual Studio Code"),
             (.vsCodeInsiders, "Visual Studio Code (Insiders)"),
@@ -34,7 +34,7 @@ public enum SupportedApps: String, CaseIterable {
     case terminal = "com.apple.Terminal"
     case iTerm = "com.googlecode.iterm2"
     // MARK: - Editors
-    case textEdit = "com.apple.TextEdit"
+    case none = "NONE"
     case xcode = "com.apple.Xcode"
     case vsCode = "com.microsoft.VSCode"
     case vsCodeInsiders = "com.microsoft.VSCodeInsiders"

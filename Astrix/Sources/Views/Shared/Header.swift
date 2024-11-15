@@ -22,7 +22,9 @@ struct Header: View {
                 .font(.largeTitle.bold())
                 .foregroundStyle(Color(NSColor.labelColor))
         }
-        .padding(24)
+        .padding(.horizontal, 24)
+        .padding(.top, 24)
+        .padding(.bottom, 20)
         .frame(maxWidth: .infinity)
     }
 }

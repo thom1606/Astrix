@@ -81,8 +81,8 @@ class FinderSync: FIFinderSync {
 
     @objc func openInEditor(_ sender: AnyObject?) {
         let userDefaults = UserDefaults(suiteName: "group.com.thom1606.Astrix")
-        let bundleIdString = userDefaults?.string(forKey: "defaultEditor") ?? SupportedApps.textEdit.rawValue
-        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .textEdit
+        let bundleIdString = userDefaults?.string(forKey: "defaultEditor") ?? SupportedApps.none.rawValue
+        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
         if (!Utilities.openApp(bundleId: bundleId)) {
             Utilities.showNotification(title: "Something failed", body: "We were not able to open your editor of choice.");
         }
