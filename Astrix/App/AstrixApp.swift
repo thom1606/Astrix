@@ -10,27 +10,28 @@ import SwiftData
 
 @main
 struct AstrixApp: App {
+    private func customizeWindow(_ window: NSWindow) {
+        window.titleVisibility = .hidden
+        window.styleMask.remove(.titled)
+        window.backgroundColor = .clear
+        window.isOpaque = false
+        window.isMovableByWindowBackground = true
+        window.titlebarAppearsTransparent = true
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea()
-                .onAppear {
-                    if let window = NSApplication.shared.windows.first {
-                        window.titleVisibility = .hidden
-                        window.standardWindowButton(.miniaturizeButton)?.isHidden = true
-                        window.standardWindowButton(.zoomButton)?.isHidden = true
-//                        window.isOpaque = false
-//                        window.backgroundColor = .clear
-//                        window.contentView?.wantsLayer = true
-//                        window.contentView?.layer?.cornerRadius = 80 // Updated corner radius
-//                        window.contentView?.layer?.masksToBounds = false
-//                        window.hasShadow = false
-                    }
+            ZStack {
+                ContentView()
+            }
+            .frame(width: 425, height: 600)
+            .background(WindowBackground())
+            .onAppear {
+                if let window = NSApplication.shared.windows.first {
+                    customizeWindow(window)
                 }
+            }
         }
-        .windowStyle(.hiddenTitleBar)
         .defaultSize(width: 425, height: 600)
-        .windowToolbarStyle(.unifiedCompact(showsTitle: false))
     }
 }

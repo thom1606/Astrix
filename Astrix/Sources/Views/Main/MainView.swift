@@ -12,20 +12,22 @@ struct MainView: View {
     @AppStorage("defaultTerminal", store: UserDefaults(suiteName: "group.com.thom1606.Astrix")) private var defaultTerminal = SupportedApps.terminal.rawValue
 
     var body: some View {
-        ScrollView {
-            VStack {
-                Picker("Default editor", selection: $defaultEditor) {
-                    ForEach(Constants.Scripting.SupportedEditorApplications, id: \.0.rawValue) {
-                        Text($1)
+        VStack {
+            Header()
+            ScrollView {
+                VStack {
+                    Picker("Default editor", selection: $defaultEditor) {
+                        ForEach(Constants.Scripting.SupportedEditorApplications, id: \.0.rawValue) {
+                            Text($1)
+                        }
                     }
-                }
-                Picker("Default terminal", selection: $defaultTerminal) {
-                    ForEach(Constants.Scripting.SupportedTerminalApplications, id: \.0.rawValue) {
-                        Text($1)
+                    Picker("Default terminal", selection: $defaultTerminal) {
+                        ForEach(Constants.Scripting.SupportedTerminalApplications, id: \.0.rawValue) {
+                            Text($1)
+                        }
                     }
                 }
             }
-            .padding(.top, 20)
         }
     }
 }

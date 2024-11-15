@@ -9,8 +9,12 @@ import SwiftUI
 
 struct Onboarding: View {
     var body: some View {
-        NavigationStack {
-            OnboardingStepWelcome()
+        VStack {
+            Header()
+            NavigationStack {
+                OnboardingStepWelcome()
+                    .padding(24)
+            }
         }
     }
 }
