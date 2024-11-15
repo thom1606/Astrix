@@ -25,7 +25,7 @@ struct NSPickerContent: View {
             .background(
                 ZStack {
                     RoundedRectangle(cornerRadius: 500)
-                        .fill(Color.white.opacity(0.06))
+                        .fill(Color("ElementsLightenBackground"))
                         .blendMode(.lighten)
                     RoundedRectangle(cornerRadius: 500)
                         .fill(Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.18))
