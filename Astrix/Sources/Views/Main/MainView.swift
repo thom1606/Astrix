@@ -57,6 +57,9 @@ struct MainView: View {
                         }
                         .buttonStyle(MainButtonStyle(fullWidth: true))
                     }
+                    Rectangle()
+                        .fill(.clear)
+                        .frame(width: 30, height: 24)
                 }
                 .padding(.horizontal, 24)
             }
