@@ -9,8 +9,8 @@ import SwiftUI
 import UserNotifications
 
 struct MainView: View {
-    @AppStorage("defaultEditor", store: UserDefaults(suiteName: "group.com.thom1606.Astrix")) private var defaultEditor = SupportedApps.none.rawValue
-    @AppStorage("defaultTerminal", store: UserDefaults(suiteName: "group.com.thom1606.Astrix")) private var defaultTerminal = SupportedApps.terminal.rawValue
+    @AppStorage("defaultEditor", store: UserDefaults(suiteName: Constants.Id.DefaultsDomain)) private var defaultEditor = SupportedApps.none.rawValue
+    @AppStorage("defaultTerminal", store: UserDefaults(suiteName: Constants.Id.DefaultsDomain)) private var defaultTerminal = SupportedApps.terminal.rawValue
 
     @State private var notificationPermissionStatus: UNAuthorizationStatus = .notDetermined
     @State private var loaded = false

@@ -87,7 +87,7 @@ class Scripting {
     }
 
     public func getFirstInstalledEditor() -> SupportedApps {
-        let editors: [SupportedApps] = [.vsCodeInsiders, .vsCode, .xcode, .none]
+        let editors: [SupportedApps] = [.cursor, .vsCodeInsiders, .vsCode, .atom, .sublime, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode]
         for editor in editors {
             if isAppInstalled(bundleIdentifier: editor.rawValue) {
                 return editor
@@ -96,7 +96,7 @@ class Scripting {
         return .none
     }
     public func getFirstInstalledTerminal() -> SupportedApps {
-        let terminals: [SupportedApps] = [.iTerm, .terminal]
+        let terminals: [SupportedApps] = [.iTerm, .hyper, .terminal]
         for terminal in terminals {
             if isAppInstalled(bundleIdentifier: terminal.rawValue) {
                 return terminal

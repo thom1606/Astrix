@@ -70,7 +70,7 @@ class FinderSync: FIFinderSync {
     }
 
     @objc func openInTerminal(_ sender: AnyObject?) {
-        let userDefaults = UserDefaults(suiteName: "group.com.thom1606.Astrix")
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
         let bundleIdString = userDefaults?.string(forKey: "defaultTerminal") ?? SupportedApps.terminal.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
         NSLog(bundleIdString)
@@ -80,7 +80,7 @@ class FinderSync: FIFinderSync {
     }
 
     @objc func openInEditor(_ sender: AnyObject?) {
-        let userDefaults = UserDefaults(suiteName: "group.com.thom1606.Astrix")
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
         let bundleIdString = userDefaults?.string(forKey: "defaultEditor") ?? SupportedApps.none.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
         if (!Utilities.openApp(bundleId: bundleId)) {
