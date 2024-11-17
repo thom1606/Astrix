@@ -11,6 +11,17 @@ import FinderSync
 
 struct OnboardingStepFinal: View {
     func handleComplete() {
+        let task = Process()
+        task.launchPath = "/usr/bin/env"
+        task.arguments = ["pluginkit", "-e", "use", "-i", "com.thom1606.Astrix.FinderTools"]
+
+        let pipe = Pipe()
+        task.standardOutput = pipe
+        task.standardError = pipe
+
+        task.launch()
+        task.waitUntilExit()
+
         UserDefaults.standard.set(true, forKey: "onboardingCompleted")
     }
 

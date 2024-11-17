@@ -5,7 +5,15 @@
 	<key>NSExtension</key>
 	<dict>
 		<key>NSExtensionAttributes</key>
-		<dict/>
+		<dict>
+            <key>FinderSync</key>
+            <dict>
+                <key>FSSupportedExtensions</key>
+                <array>
+                    <string>*</string>
+                </array>
+            </dict>
+        </dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.FinderSync</string>
 		<key>NSExtensionPrincipalClass</key>

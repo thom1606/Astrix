@@ -52,8 +52,8 @@ struct OnboardingStepWelcome: View {
 
     func handleNext() {
         let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        userDefaults?.set(Scripting.shared.getFirstInstalledTerminal().rawValue, forKey: "defaultTerminal")
-        userDefaults?.set(Scripting.shared.getFirstInstalledEditor().rawValue, forKey: "defaultEditor")
+        userDefaults?.set(Scripting.shared.getFirstInstalledTerminal().rawValue, forKey: Constants.Id.DefaultTerminalKey)
+        userDefaults?.set(Scripting.shared.getFirstInstalledEditor().rawValue, forKey: Constants.Id.DefaultEditorKey)
 
         pageSelection += 1
     }

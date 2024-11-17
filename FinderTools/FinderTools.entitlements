@@ -6,7 +6,7 @@
 	<true/>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.com.thom1606.Astrix</string>
+		<string>$(TeamIdentifierPrefix)com.thom1606.Astrix</string>
 	</array>
 	<key>com.apple.security.automation.apple-events</key>
 	<true/>

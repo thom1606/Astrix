@@ -57,11 +57,19 @@ class FinderSync: FIFinderSync {
             menu.addItem(NSMenuItem.separator())
         }
 
-        let openInTerminalItem = NSMenuItem(title: "Open in Terminal", action: #selector(openInTerminal(_:)), keyEquivalent: "")
-        menu.addItem(openInTerminalItem)
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
+        let terminalKey = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.none.rawValue
+        let editorKey = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
 
-        let openInEditorItem = NSMenuItem(title: "Open in Editor", action: #selector(openInEditor(_:)), keyEquivalent: "")
-        menu.addItem(openInEditorItem)
+        if (terminalKey != SupportedApps.none.rawValue) {
+            let openInTerminalItem = NSMenuItem(title: "Open in Terminal", action: #selector(openInTerminal(_:)), keyEquivalent: "")
+            menu.addItem(openInTerminalItem)
+        }
+
+        if (editorKey != SupportedApps.none.rawValue) {
+            let openInEditorItem = NSMenuItem(title: "Open in Editor", action: #selector(openInEditor(_:)), keyEquivalent: "")
+            menu.addItem(openInEditorItem)
+        }
 
         let copyPathItem = NSMenuItem(title: "Copy Path", action: #selector(copyPath(_:)), keyEquivalent: "")
         menu.addItem(copyPathItem)
@@ -71,9 +79,8 @@ class FinderSync: FIFinderSync {
 
     @objc func openInTerminal(_ sender: AnyObject?) {
         let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        let bundleIdString = userDefaults?.string(forKey: "defaultTerminal") ?? SupportedApps.terminal.rawValue
+        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.terminal.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
-        NSLog(bundleIdString)
         if (!Utilities.openApp(bundleId: bundleId)) {
             Utilities.showNotification(title: "Something failed", body: "We were not able to open your terminal.");
         }
@@ -81,7 +88,7 @@ class FinderSync: FIFinderSync {
 
     @objc func openInEditor(_ sender: AnyObject?) {
         let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        let bundleIdString = userDefaults?.string(forKey: "defaultEditor") ?? SupportedApps.none.rawValue
+        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
         if (!Utilities.openApp(bundleId: bundleId)) {
             Utilities.showNotification(title: "Something failed", body: "We were not able to open your editor of choice.");

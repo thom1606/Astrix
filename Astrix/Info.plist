@@ -2,12 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundlePrimaryIcon</key>
-	<dict>
-		<key>CFBundleIconFiles</key>
-		<string>AppIcon</string>
-	</dict>
-	<key>NSAppGroupsUsageDescription</key>
-	<string>We need access to shared data to provide a seamless experience across our apps.</string>
+	<key>TEAM_IDENTIFIER</key>
+	<string>$(TEAM_IDENTIFIER)</string>
 </dict>
 </plist>

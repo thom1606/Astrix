@@ -9,8 +9,16 @@ import Foundation
 
 struct Constants {
     struct Id {
+        static let teamIdentifier: String = {
+            guard let identifier = Bundle.main.object(forInfoDictionaryKey: "TEAM_IDENTIFIER") as? String else {
+                fatalError("TEAM_IDENTIFIER not set in xcconfig")
+            }
+            return identifier
+        }()
         static let FinderExtension = "com.thom1606.Astrix.FinderTools"
-        static let DefaultsDomain = "group.com.thom1606.Astrix"
+        static let DefaultsDomain = "\(Constants.Id.teamIdentifier).com.thom1606.Astrix"
+        static let DefaultTerminalKey = "defaultTerminal"
+        static let DefaultEditorKey = "defaultEditor"
     }
 
     struct Scripting {

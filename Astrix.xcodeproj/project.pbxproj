@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844A9EE12CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
+		844A9EE22CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
 		84A106822CE623DA0081261A /* FinderTools.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84A1067A2CE623DA0081261A /* FinderTools.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -35,12 +37,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		844A9EE02CEA438600617787 /* Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Global.xcconfig; sourceTree = "<group>"; };
 		84A106492CE60CFD0081261A /* Astrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1067A2CE623DA0081261A /* FinderTools.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderTools.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		84A106722CE619450081261A /* Exceptions for "Astrix" folder in "Astrix" target */ = {
+		844A9EE42CEA44FA00617787 /* Exceptions for "Astrix" folder in "Astrix" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -70,7 +73,7 @@
 		84A1064B2CE60CFD0081261A /* Astrix */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				84A106722CE619450081261A /* Exceptions for "Astrix" folder in "Astrix" target */,
+				844A9EE42CEA44FA00617787 /* Exceptions for "Astrix" folder in "Astrix" target */,
 				84A1068C2CE623F80081261A /* Exceptions for "Astrix" folder in "FinderTools" target */,
 			);
 			path = Astrix;
@@ -104,9 +107,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		844A9EDF2CEA435A00617787 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				844A9EE02CEA438600617787 /* Global.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 		84A106402CE60CFD0081261A = {
 			isa = PBXGroup;
 			children = (
+				844A9EDF2CEA435A00617787 /* Configuration */,
 				84A1064B2CE60CFD0081261A /* Astrix */,
 				84A1067B2CE623DA0081261A /* FinderTools */,
 				84A1064A2CE60CFD0081261A /* Products */,
@@ -214,6 +226,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844A9EE12CEA438600617787 /* Global.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -221,6 +234,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844A9EE22CEA438600617787 /* Global.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +268,7 @@
 /* Begin XCBuildConfiguration section */
 		84A106582CE60CFE0081261A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -317,6 +332,7 @@
 		};
 		84A106592CE60CFE0081261A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -372,13 +388,15 @@
 		};
 		84A1065B2CE60CFE0081261A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Astrix/Astrix.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -391,9 +409,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -401,13 +420,15 @@
 		};
 		84A1065C2CE60CFE0081261A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Astrix/Astrix.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -420,9 +441,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -430,11 +452,13 @@
 		};
 		84A106842CE623DA0081261A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FinderTools/FinderTools.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -447,9 +471,10 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix.FinderTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -458,11 +483,13 @@
 		};
 		84A106852CE623DA0081261A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 844A9EE02CEA438600617787 /* Global.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = FinderTools/FinderTools.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -475,9 +502,10 @@
 					"@executable_path/../Frameworks",
 					"@executable_path/../../../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix.FinderTools;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
