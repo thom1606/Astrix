@@ -6,18 +6,20 @@
 	<dict>
 		<key>NSExtensionAttributes</key>
 		<dict>
-            <key>FinderSync</key>
-            <dict>
-                <key>FSSupportedExtensions</key>
-                <array>
-                    <string>*</string>
-                </array>
-            </dict>
-        </dict>
+			<key>FinderSync</key>
+			<dict>
+				<key>FSSupportedExtensions</key>
+				<array>
+					<string>*</string>
+				</array>
+			</dict>
+		</dict>
 		<key>NSExtensionPointIdentifier</key>
 		<string>com.apple.FinderSync</string>
 		<key>NSExtensionPrincipalClass</key>
 		<string>$(PRODUCT_MODULE_NAME).FinderSync</string>
 	</dict>
+	<key>TEAM_IDENTIFIER</key>
+	<string>$(TEAM_IDENTIFIER)</string>
 </dict>
 </plist>

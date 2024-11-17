@@ -46,12 +46,12 @@ class Scripting {
             .appendingPathComponent(Constants.Scripting.ToolsFileName)
             .appendingPathExtension(Constants.Scripting.ToolsFileExtension);
         let toolsScript = """
-            on openApp(command)
+            on runCommand(command)
                 tell application "Finder"
                     activate
                     do shell script command
                 end tell
-            end openApp
+            end runCommand
             """;
         try writeScriptIfNeeded(at: toolsPath, with: toolsScript);
     }

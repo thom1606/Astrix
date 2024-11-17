@@ -50,7 +50,7 @@ class Utilities {
         guard FileManager.default.fileExists(atPath: scriptURL.path) else { return false }
         guard let script = try? NSUserAppleScriptTask(url: scriptURL) else { return false }
 
-        let event = Scripting.shared.getScriptEvent(functionName: "openApp", openCommand)
+        let event = Scripting.shared.getScriptEvent(functionName: "runCommand", openCommand)
         let semaphore = DispatchSemaphore(value: 0)
         var success = true
 
