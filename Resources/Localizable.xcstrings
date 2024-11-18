@@ -41,6 +41,26 @@
         }
       }
     },
+    "Copy Paths" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieer paden"
+          }
+        }
+      }
+    },
+    "Copy Workspace Path" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopeer folder pad"
+          }
+        }
+      }
+    },
     "Customize Astrix to suit your preferences. If you don't find your preferred software, feel free to [open an issue](https://github.com/thom1606/Astrix/issues/new?labels=enhancement&template=request-new-software.md&title=%5BRequest%5D+Add+new+software%3A+%3CSoftware+Name%3E) so we can consider adding it!" : {
       "localizations" : {
         "nl" : {
@@ -202,16 +222,6 @@
         }
       }
     },
-    "Something failed" : {
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Oeps!"
-          }
-        }
-      }
-    },
     "Stay Informed" : {
       "localizations" : {
         "nl" : {
@@ -227,7 +237,17 @@
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "De locatie is gekopieerd naar je klembord."
+            "value" : "Het pad is gekopieerd naar je klembord."
+          }
+        }
+      }
+    },
+    "The paths are copied to your clipboard." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De paden zijn gekopieerd naar je klembord."
           }
         }
       }
@@ -258,6 +278,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "We hebben een probleem ondervonden bij het aanvragen van notificatie rechten. Wil je doorgaan zonder?"
+          }
+        }
+      }
+    },
+    "We were not able to copy the path to your clipboard." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We konden je pad niet kopiëren naar het klembord."
+          }
+        }
+      }
+    },
+    "We were not able to copy the path(s) to your clipboard." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We konden je pad(en) niet kopiëren naar ht klembord."
           }
         }
       }

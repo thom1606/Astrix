@@ -9,19 +9,8 @@ import FinderSync
 import UserNotifications
 
 class Utilities {
-    /// Get the currently selected paths from finder as an URL array
-    static func getSelectedPathsFromFinder() -> [URL] {
-        var urls = [URL]()
-        if let items = FIFinderSyncController.default().selectedItemURLs(), items.count > 0 {
-            items.forEach {
-                urls.append($0)
-            }
-        } else if let url = FIFinderSyncController.default().targetedURL() {
-            urls.append(url)
-        }
-        return urls
-    }
-
+    /// Get the correct open command based on the bundle id provided.
+    /// We do this because some applications have a specific open command
     static func getOpenCommand(bundleId: SupportedApps, url: URL) -> String {
         if (bundleId == .xcode) { return "xed '\(url.path)'" }
         return "open -b \(bundleId.rawValue) '\(url.path)'"
@@ -29,21 +18,14 @@ class Utilities {
 
     /// Open the current folder with a specified app
     static func openApp (bundleId: SupportedApps) -> Bool {
-        guard var url = Utilities.getSelectedPathsFromFinder().first else { return false }
-
         if bundleId == .none { return false }
 
-        // check the path is directory or not
-        var isDirectory: ObjCBool = false
-        guard FileManager.default.fileExists(atPath: url.path, isDirectory: &isDirectory) else { return false }
+        // Get the workspace url
+        let url = FIFinderSyncController.default().targetedURL()
+        if url == nil { return false }
 
-        // if the selected is a file, then delete last path component
-        if isDirectory.boolValue == false {
-            url.deleteLastPathComponent()
-        }
-
-        let openCommand = getOpenCommand(bundleId: bundleId, url: url);
-        NSLog(openCommand)
+        // Create the open command
+        let openCommand = getOpenCommand(bundleId: bundleId, url: url!)
 
         // Try and load the applescript
         guard let scriptURL = Scripting.shared.getScriptURL(name: Constants.Scripting.ToolsFileName) else { return false }
@@ -67,6 +49,7 @@ class Utilities {
         return success
     }
 
+    /// Create a local notification for the user
     static func showNotification(title: String, body: String) {
         let center = UNUserNotificationCenter.current()
         let content = UNMutableNotificationContent()
@@ -80,5 +63,11 @@ class Utilities {
                 NSLog("Error adding notification: \(error.localizedDescription)")
             }
         }
+    }
+
+    static func createTitleItem(title: String) -> NSMenuItem {
+        let item = NSMenuItem(title: NSLocalizedString(title, comment: ""), action: nil, keyEquivalent: "")
+        item.isEnabled = false
+        return item
     }
 }
