@@ -11,7 +11,7 @@ The application is built using SwiftUI and Swift and is available for MacOS 14.0
 
 ## Getting Started
 
-1. Download the latest version of Astrix from the [releases page](https://github.com/thom1606/Astrix/releases)
+1. Download the latest version of Astrix from the [releases page](https://github.com/thom1606/Astrix/releases).
 2. Open the DMG and install the app into your Applications folder.
 3. Open the app and follow the onboarding steps.
 4. Once the onboarding is complete, you can start using Astrix in your Finder app.
