@@ -53,25 +53,24 @@ class FinderSync: FIFinderSync {
     func createMenu(context: Bool) -> NSMenu {
         let menu = NSMenu(title: "")
 
-        if context {
-            menu.addItem(NSMenuItem.separator())
-        }
-
         let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
         let terminalKey = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.none.rawValue
         let editorKey = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
 
         if (terminalKey != SupportedApps.none.rawValue) {
             let openInTerminalItem = NSMenuItem(title: "Open in Terminal", action: #selector(openInTerminal(_:)), keyEquivalent: "")
+            openInTerminalItem.tag = 1
             menu.addItem(openInTerminalItem)
         }
 
         if (editorKey != SupportedApps.none.rawValue) {
             let openInEditorItem = NSMenuItem(title: "Open in Editor", action: #selector(openInEditor(_:)), keyEquivalent: "")
+            openInEditorItem.tag = 2
             menu.addItem(openInEditorItem)
         }
 
         let copyPathItem = NSMenuItem(title: "Copy Path", action: #selector(copyPath(_:)), keyEquivalent: "")
+        copyPathItem.tag = 3
         menu.addItem(copyPathItem)
 
         return menu
