@@ -5,15 +5,21 @@ Welcome to **Astrix**! Your one-stop solution for easy finder management. This p
 
 ## Project Overview
 
-This project is completely build using [SwiftUI](https://developer.apple.com/xcode/swiftui/), a modern way to build user interfaces across all Apple platforms.
+Astrix is a MacOS finder extension which allows you to open your files and folders in your favorite editors and terminals. It provides a simple and easy-to-use interface that allows you to quickly open your files and folders in your favorite editors and terminals. To get started with Astrix, you can simply open the app, walk trough the onboarding and Astrix will be ready in your Finder app.
+
+The application is built using SwiftUI and Swift and is available for MacOS 14.0 and above.
 
 ## Getting Started
 
-1. Open the project in Xcode.
-2. Check which scheme you are running.
-3. Run the main Astrix scheme to start using the project.
-4. After walking through the onboarding, you can start using the app.
-5. Mount the finder extension to your Finder app to start using the tools it provide.
+1. Download the latest version of Astrix from the [releases page]([https](https://github.com/thom1606/Astrix/releases)
+2. Open the DMG and install the app into your Applications folder.
+3. Open the app and follow the onboarding steps.
+4. Once the onboarding is complete, you can start using Astrix in your Finder app.
+5. If you are not able to see the Astrix app in your Finder app, you can enable it by right clicking on the `Finder toolbar` > `Customize toolbar` > and selecting the Astrix app.
+
+## Sponsorship
+
+If you like the project and would like to support the development, you can sponsor the project on [Github Sponsors](https://github.com/sponsors/thom1606). Your support will help me to continue working on the project and add new features.
 
 ## Feature Requests?
 
