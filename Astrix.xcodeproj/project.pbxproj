@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		842C8F152CEB33660055DB9C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 842C8F142CEB33660055DB9C /* Localizable.xcstrings */; };
+		842C8F162CEB37250055DB9C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 842C8F142CEB33660055DB9C /* Localizable.xcstrings */; };
 		844A9EE12CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
 		844A9EE22CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
 		84A106822CE623DA0081261A /* FinderTools.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84A1067A2CE623DA0081261A /* FinderTools.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -37,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		842C8F142CEB33660055DB9C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		844A9EE02CEA438600617787 /* Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Global.xcconfig; sourceTree = "<group>"; };
 		84A106492CE60CFD0081261A /* Astrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1067A2CE623DA0081261A /* FinderTools.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderTools.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -106,6 +109,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		842C8F132CEB332D0055DB9C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				842C8F142CEB33660055DB9C /* Localizable.xcstrings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		844A9EDF2CEA435A00617787 /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -117,6 +128,7 @@
 		84A106402CE60CFD0081261A = {
 			isa = PBXGroup;
 			children = (
+				842C8F132CEB332D0055DB9C /* Resources */,
 				844A9EDF2CEA435A00617787 /* Configuration */,
 				84A1064B2CE60CFD0081261A /* Astrix */,
 				84A1067B2CE623DA0081261A /* FinderTools */,
@@ -206,6 +218,7 @@
 			knownRegions = (
 				en,
 				Base,
+				nl,
 			);
 			mainGroup = 84A106402CE60CFD0081261A;
 			minimizedProjectReferenceProxies = 1;
@@ -226,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				844A9EE12CEA438600617787 /* Global.xcconfig in Resources */,
+				842C8F152CEB33660055DB9C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,6 +248,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				844A9EE22CEA438600617787 /* Global.xcconfig in Resources */,
+				842C8F162CEB37250055DB9C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,6 +340,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -382,6 +398,7 @@
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
 		};
@@ -474,7 +491,7 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				MARKETING_VERSION = 1.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix.FinderTools;
+				PRODUCT_BUNDLE_IDENTIFIER = com.thom1606.Astrix.FinderTools.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;

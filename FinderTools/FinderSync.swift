@@ -29,7 +29,7 @@ class FinderSync: FIFinderSync {
     }
 
     override var toolbarItemToolTip: String {
-        return "Easily navigate right from your finder window"
+        return NSLocalizedString("Easily navigate right from your finder window", comment: "Toolbar itme tooltip")
     }
 
     override var toolbarItemImage: NSImage {
@@ -58,18 +58,18 @@ class FinderSync: FIFinderSync {
         let editorKey = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
 
         if (terminalKey != SupportedApps.none.rawValue) {
-            let openInTerminalItem = NSMenuItem(title: "Open in Terminal", action: #selector(openInTerminal(_:)), keyEquivalent: "")
+            let openInTerminalItem = NSMenuItem(title: NSLocalizedString("Open in Terminal", comment: ""), action: #selector(openInTerminal(_:)), keyEquivalent: "")
             openInTerminalItem.tag = 1
             menu.addItem(openInTerminalItem)
         }
 
         if (editorKey != SupportedApps.none.rawValue) {
-            let openInEditorItem = NSMenuItem(title: "Open in Editor", action: #selector(openInEditor(_:)), keyEquivalent: "")
+            let openInEditorItem = NSMenuItem(title: NSLocalizedString("Open in Editor", comment: ""), action: #selector(openInEditor(_:)), keyEquivalent: "")
             openInEditorItem.tag = 2
             menu.addItem(openInEditorItem)
         }
 
-        let copyPathItem = NSMenuItem(title: "Copy Path", action: #selector(copyPath(_:)), keyEquivalent: "")
+        let copyPathItem = NSMenuItem(title: NSLocalizedString("Copy Path", comment: ""), action: #selector(copyPath(_:)), keyEquivalent: "")
         copyPathItem.tag = 3
         menu.addItem(copyPathItem)
 
@@ -81,7 +81,7 @@ class FinderSync: FIFinderSync {
         let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.terminal.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
         if (!Utilities.openApp(bundleId: bundleId)) {
-            Utilities.showNotification(title: "Something failed", body: "We were not able to open your terminal.");
+            Utilities.showNotification(title: NSLocalizedString("Something failed", comment: ""), body: NSLocalizedString("We were not able to open your terminal.", comment: ""));
         }
     }
 
@@ -90,7 +90,7 @@ class FinderSync: FIFinderSync {
         let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
         if (!Utilities.openApp(bundleId: bundleId)) {
-            Utilities.showNotification(title: "Something failed", body: "We were not able to open your editor of choice.");
+            Utilities.showNotification(title: NSLocalizedString("Something failed", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""));
         }
     }
 
@@ -99,7 +99,7 @@ class FinderSync: FIFinderSync {
         let pasteboard = NSPasteboard.general;
         pasteboard.clearContents();
         pasteboard.setString(paths.joined(separator: "\n"), forType: .string);
-        Utilities.showNotification(title: "Copied!", body: "The path is copied to your clipboard.");
+        Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The path is copied to your clipboard.", comment: ""));
     }
 }
 

@@ -180,7 +180,7 @@ private struct NSPicker: NSViewRepresentable {
 }
 
 struct LabeledPicker: View {
-    var label: String
+    var label: LocalizedStringKey
     @Binding var selection: String
     let items: [(String, String)]
 

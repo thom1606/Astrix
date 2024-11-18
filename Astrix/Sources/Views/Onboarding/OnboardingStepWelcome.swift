@@ -11,14 +11,14 @@ struct OnboardingStepWelcome: View {
     @Binding var pageSelection: Int
     @State private var hasSetup = false
 
-    var title: String {
-        if !hasSetup { return "Hang tight!" }
-        return "Welcome to Astrix"
+    var title: LocalizedStringKey {
+        if !hasSetup { return LocalizedStringKey("Hang tight!") }
+        return LocalizedStringKey("Welcome to Astrix")
     }
 
-    var description: String {
-        if !hasSetup { return "We're just getting things ready for you. Almost there!" }
-        return "Enhance your workflow with Astrix and experience a new level of productivity and efficiency."
+    var description: LocalizedStringKey {
+        if !hasSetup { return LocalizedStringKey("We're just getting things ready for you. Almost there!") }
+        return LocalizedStringKey("Enhance your workflow with Astrix and experience a new level of productivity and efficiency.")
     }
 
     func load() {
@@ -35,13 +35,13 @@ struct OnboardingStepWelcome: View {
             // Handle errors and leave the dispatch group
             dispatchGroup.leave()
         }
-        
+
         // Enter the dispatch group for the minimum delay
         dispatchGroup.enter()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             dispatchGroup.leave()
         }
-        
+
         // Notify when both tasks are complete
         dispatchGroup.notify(queue: .main) {
             withAnimation {

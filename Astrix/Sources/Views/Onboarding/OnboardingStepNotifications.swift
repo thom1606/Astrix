@@ -37,19 +37,19 @@ struct OnboardingStepNotifications: View {
         }
     }
 
-    var title: String {
-        if errored { return "Oops!" }
-        return "Stay Informed"
+    var title: LocalizedStringKey {
+        if errored { return LocalizedStringKey("Oops!") }
+        return LocalizedStringKey("Stay Informed")
     }
 
-    var description: String {
-        if errored { return "We encountered a problem whilst requestion notification permissions. Would you like to continue without?" }
-        return "To ensure you are always up to date with your workflow, we will only send you notifications when it's essential for your tasks."
+    var description: LocalizedStringKey {
+        if errored { return ("We encountered a problem whilst requestion notification permissions. Would you like to continue without?") }
+        return LocalizedStringKey("To ensure you are always up to date with your workflow, we will only send you notifications when it's essential for your tasks.")
     }
 
-    var buttonText: String {
-        if errored { return "Continue" }
-        return "Request access"
+    var buttonText: LocalizedStringKey {
+        if errored { return LocalizedStringKey("Continue") }
+        return LocalizedStringKey("Request access")
     }
 
     var body: some View {

@@ -1,0 +1,327 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "Continue" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Doorgaan"
+          }
+        }
+      }
+    },
+    "Copied!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gekopieerd!"
+          }
+        }
+      }
+    },
+    "Copy Path" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kopieer pad"
+          }
+        }
+      }
+    },
+    "Customize Astrix to suit your preferences. If you don't find your preferred software, feel free to [open an issue](https://github.com/thom1606/Astrix/issues/new?labels=enhancement&template=request-new-software.md&title=%5BRequest%5D+Add+new+software%3A+%3CSoftware+Name%3E) so we can consider adding it!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pas Astrix aan naar jouw voorkeuren. Als je je favoriete software niet kunt vinden, voel je dan vrij om [een ticket te openen](https://github.com/thom1606/Astrix/issues/new?labels=enhancement&template=request-new-software.md&title=%5BRequest%1$5D+Add+new+software%2$3A+%3$3CSoftware+Name%4$3E) zodat we kunnen overwegen het toe te voegen!"
+          }
+        }
+      }
+    },
+    "Default editor" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard editor"
+          }
+        }
+      }
+    },
+    "Default terminal" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaard terminal"
+          }
+        }
+      }
+    },
+    "Easily navigate right from your finder window" : {
+      "comment" : "Toolbar itme tooltip",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigeer eenvoudig vanuit je Finder-venster"
+          }
+        }
+      }
+    },
+    "Enhance your workflow with Astrix and experience a new level of productivity and efficiency." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verbeter je werkervaring met Astrix en ervaar een nieuw niveau van productiviteit en efficiëntie."
+          }
+        }
+      }
+    },
+    "Get started" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Begin"
+          }
+        }
+      }
+    },
+    "Hang tight!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Even wachten!"
+          }
+        }
+      }
+    },
+    "Let's go!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Laten we beginnen!"
+          }
+        }
+      }
+    },
+    "New update available" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nieuwe update beschikbaar"
+          }
+        }
+      }
+    },
+    "Oops!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oeps!"
+          }
+        }
+      }
+    },
+    "Open in Editor" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in editor"
+          }
+        }
+      }
+    },
+    "Open in Terminal" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in terminal"
+          }
+        }
+      }
+    },
+    "Ready to Start?" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klaar om te starten?"
+          }
+        }
+      }
+    },
+    "Request access" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen toestaan?"
+          }
+        }
+      }
+    },
+    "Request notification access" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen toestaan?"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen"
+          }
+        }
+      }
+    },
+    "Something failed" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oeps!"
+          }
+        }
+      }
+    },
+    "Stay Informed" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blijf op de hoogte"
+          }
+        }
+      }
+    },
+    "The path is copied to your clipboard." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De locatie is gekopieerd naar je klembord."
+          }
+        }
+      }
+    },
+    "There is a new update available for Astrix! Please download the latest version to enjoy new features and improvements." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Er is een nieuwe update beschikbaar voor Astrix! Download de nieuwste versie om te genieten van nieuwe functies en verbeteringen."
+          }
+        }
+      }
+    },
+    "To ensure you are always up to date with your workflow, we will only send you notifications when it's essential for your tasks." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Om ervoor te zorgen dat je altijd up-to-date bent, sturen we je alleen meldingen wanneer het essentieel is voor je taken."
+          }
+        }
+      }
+    },
+    "We encountered a problem whilst requestion notification permissions. Would you like to continue without?" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We hebben een probleem ondervonden bij het aanvragen van notificatie rechten. Wil je doorgaan zonder?"
+          }
+        }
+      }
+    },
+    "We were not able to open your editor of choice." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We konden je gekozen editor niet openen."
+          }
+        }
+      }
+    },
+    "We were not able to open your terminal." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We konden je gekozen terminal niet openen."
+          }
+        }
+      }
+    },
+    "We're just getting things ready for you. Almost there!" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We maken alles voor je klaar. We zijn er bijna!"
+          }
+        }
+      }
+    },
+    "Welcome to Astrix" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welkom bij Astrix"
+          }
+        }
+      }
+    },
+    "You are all set to begin your journey with Astrix! Try adding Astrix to your Finder toolbar and enjoy a more streamlined workflow." : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je bent helemaal klaar om te starten met Astrix! Probeer Astrix toe te voegen aan je Finder-werkbalk en geniet van een meer gestroomlijnde workflow."
+          }
+        }
+      }
+    },
+    "You currently don’t have notifications permissions set up. Would you like to?" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Je hebt momenteel geen notificatie rechten ingesteld. Wil je dat doen?"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
