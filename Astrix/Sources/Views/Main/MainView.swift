@@ -70,8 +70,8 @@ struct MainView: View {
                         .foregroundStyle(Color(NSColor.secondaryLabelColor))
                         .font(.system(size: 19, weight: .regular))
 
-                    LabeledPicker(label: "Default editor", selection: $defaultEditor, items: Constants.Scripting.SupportedEditorApplications.map { ($0.rawValue, $1) })
-                    LabeledPicker(label: "Default terminal", selection: $defaultTerminal, items: Constants.Scripting.SupportedTerminalApplications.map { ($0.rawValue, $1) })
+                    LabeledPicker(label: "Default editor", selection: $defaultEditor, items: [(SupportedApps.none.rawValue, NSLocalizedString("None", comment: ""))] + Constants.Scripting.SupportedEditorApplications.filter { $0.0 != .none }.sorted(by: { $0.1 < $1.1 }).map { ($0.rawValue, $1) })
+                    LabeledPicker(label: "Default terminal", selection: $defaultTerminal, items: [(SupportedApps.none.rawValue, NSLocalizedString("None", comment: ""))] + Constants.Scripting.SupportedTerminalApplications.filter { $0.0 != .none }.sorted(by: { $0.1 < $1.1 }).map { ($0.rawValue, $1) })
 
                     if notificationPermissionStatus == .notDetermined && loaded {
                         Seperator()

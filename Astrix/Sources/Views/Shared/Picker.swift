@@ -9,7 +9,7 @@ struct NSPickerContent: View {
     var body: some View {
         ZStack {
             HStack {
-                Text(title)
+                Text(LocalizedStringKey(title))
                     .lineLimit(1)
                     .font(.system(size: size.fontSize, weight: .semibold))
                     .foregroundColor(Color(NSColor.labelColor))
@@ -84,7 +84,7 @@ private struct NSPicker: NSViewRepresentable {
         let view = NSView()
 
         // Find the selected item's title
-        let selectedItemTitle = items.first { $0.0 == selection.wrappedValue }?.1 ?? "Select"
+        let selectedItemTitle = items.first { $0.0 == selection.wrappedValue }?.1 ?? NSLocalizedString("Select", comment: "")
 
         // Create the SwiftUI view
         let pickerContent = NSPickerContent(size: size, title: selectedItemTitle)
@@ -146,7 +146,7 @@ private struct NSPicker: NSViewRepresentable {
     func updateNSView(_ nsView: NSView, context: Context) {
         // Update the selected item's title
         if let button = context.coordinator.button {
-            let selectedItemTitle = items.first { $0.0 == selection.wrappedValue }?.1 ?? "Select"
+            let selectedItemTitle = items.first { $0.0 == selection.wrappedValue }?.1 ?? NSLocalizedString("Select", comment: "")
             if let hostingView = button.subviews.first as? NSHostingView<NSPickerContent> {
                 hostingView.rootView = NSPickerContent(size: size, title: selectedItemTitle)
             }

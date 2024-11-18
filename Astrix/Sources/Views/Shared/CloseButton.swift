@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct CloseButton: View {
-    @Environment(\.dismissWindow) private var dismissWindow
-
     var body: some View {
         Button {
-            dismissWindow()
+            NSApplication.shared.terminate(nil)
         } label: {
             Image(systemName: "multiply")
         }

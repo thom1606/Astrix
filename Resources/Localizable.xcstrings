@@ -152,6 +152,16 @@
         }
       }
     },
+    "None" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Geen"
+          }
+        }
+      }
+    },
     "Oops!" : {
       "localizations" : {
         "nl" : {
@@ -208,6 +218,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meldingen toestaan?"
+          }
+        }
+      }
+    },
+    "Select" : {
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Selecteer"
           }
         }
       }

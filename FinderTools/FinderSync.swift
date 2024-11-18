@@ -52,7 +52,7 @@ class FinderSync: FIFinderSync {
                 let astrixMenu = NSMenu(title: "")
 
                 // Check if there are any selected files which could be copied to the clipboard
-                if itemPaths != nil && itemPaths!.isEmpty {
+                if itemPaths != nil && !itemPaths!.isEmpty {
                     if itemPaths!.first!.relativePath != workspacePath?.relativePath {
                         // Create items menu title
                         astrixMenu.addItem(Utilities.createTitleItem(title: "Item"))
@@ -147,7 +147,7 @@ class FinderSync: FIFinderSync {
         let itemPaths = FIFinderSyncController.default().selectedItemURLs()
 
         // If no items are found, show an error
-        if itemPaths == nil && itemPaths!.isEmpty {
+        if itemPaths == nil || itemPaths!.isEmpty {
             Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to copy the path(s) to your clipboard.", comment: ""))
             return
         }

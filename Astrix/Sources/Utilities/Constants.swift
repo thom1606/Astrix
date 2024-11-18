@@ -36,7 +36,8 @@ struct Constants {
             (.phpStorm, "PhpStorm"),
             (.pyCharm, "PyCharm"),
             (.rubyMine, "RubyMine"),
-            (.webStorm, "WebStorm")
+            (.webStorm, "WebStorm"),
+            (.androidStudio, "Android Studio")
         ]
         static let SupportedTerminalApplications: [(SupportedApps, String)] = [
             (.none, "None"),
@@ -65,4 +66,5 @@ public enum SupportedApps: String, CaseIterable {
     case pyCharm = "com.jetbrains.pycharm"
     case rubyMine = "com.jetbrains.rubymine"
     case webStorm = "com.jetbrains.webstorm"
+    case androidStudio = "com.google.android.studio"
 }
