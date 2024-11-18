@@ -12,7 +12,7 @@ class Utilities {
     /// Get the correct open command based on the bundle id provided.
     /// We do this because some applications have a specific open command
     static func getOpenCommand(bundleId: SupportedApps, url: URL) -> String {
-        if (bundleId == .xcode) { return "xed '\(url.path)'" }
+        if bundleId == .xcode { return "xed '\(url.path)'" }
         return "open -b \(bundleId.rawValue) '\(url.path)'"
     }
 
@@ -37,7 +37,7 @@ class Utilities {
         var success = true
 
         // Execute the script
-        script.execute(withAppleEvent: event) { (appleEvent, error) in
+        script.execute(withAppleEvent: event) { (_, error) in
             if let error = error {
                 NSLog("could not load script: \(error.localizedDescription)")
                 success = false

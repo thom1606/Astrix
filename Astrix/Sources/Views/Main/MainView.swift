@@ -27,7 +27,7 @@ struct MainView: View {
     }
     // Request access to the notifications
     func requestNotificationAccess() {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { granted, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { _, _ in
             checkNotificationPermissionStatus()
         }
     }
@@ -40,7 +40,7 @@ struct MainView: View {
         }
         let encodedAppVersion = appVersion.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? appVersion
         let updateURL = URL(string: "https://astrix.thomvandenbroek.com/api/update?version=\(encodedAppVersion)")!
-        URLSession.shared.dataTask(with: updateURL) { data, response, error in
+        URLSession.shared.dataTask(with: updateURL) { _, response, error in
             guard error == nil else {
                 print("Failed to check for updates: \(error?.localizedDescription ?? "Unknown error")")
                 return
@@ -69,7 +69,6 @@ struct MainView: View {
                     Text("Customize Astrix to suit your preferences. If you don't find your preferred software, feel free to [open an issue](https://github.com/thom1606/Astrix/issues/new?labels=enhancement&template=request-new-software.md&title=%5BRequest%5D+Add+new+software%3A+%3CSoftware+Name%3E) so we can consider adding it!")
                         .foregroundStyle(Color(NSColor.secondaryLabelColor))
                         .font(.system(size: 19, weight: .regular))
-
 
                     LabeledPicker(label: "Default editor", selection: $defaultEditor, items: Constants.Scripting.SupportedEditorApplications.map { ($0.rawValue, $1) })
                     LabeledPicker(label: "Default terminal", selection: $defaultTerminal, items: Constants.Scripting.SupportedTerminalApplications.map { ($0.rawValue, $1) })

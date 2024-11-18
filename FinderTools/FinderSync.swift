@@ -45,15 +45,14 @@ class FinderSync: FIFinderSync {
 
         switch menuKind {
             case .contextualMenuForContainer,
-                .contextualMenuForItems:
-                let itemPaths = FIFinderSyncController.default().selectedItemURLs()
+            .contextualMenuForItems:
+                    let itemPaths = FIFinderSyncController.default().selectedItemURLs()
                 let workspacePath = FIFinderSyncController.default().targetedURL()
 
                 let astrixMenu = NSMenu(title: "")
 
-
                 // Check if there are any selected files which could be copied to the clipboard
-                if itemPaths != nil && itemPaths!.count > 0 {
+                if itemPaths != nil && itemPaths!.isEmpty {
                     if itemPaths!.first!.relativePath != workspacePath?.relativePath {
                         // Create items menu title
                         astrixMenu.addItem(Utilities.createTitleItem(title: "Item"))
@@ -98,12 +97,12 @@ class FinderSync: FIFinderSync {
         var result: [NSMenuItem] = []
 
         // Open a terminal in this workspace
-        if (terminalKey != SupportedApps.none.rawValue) {
+        if terminalKey != SupportedApps.none.rawValue {
             let openInTerminalItem = NSMenuItem(title: NSLocalizedString("Open in Terminal", comment: ""), action: #selector(openInTerminal(_:)), keyEquivalent: "")
             result.append(openInTerminalItem)
         }
         // Open the editor in this workspace
-        if (editorKey != SupportedApps.none.rawValue) {
+        if editorKey != SupportedApps.none.rawValue {
             let openInEditorItem = NSMenuItem(title: NSLocalizedString("Open in Editor", comment: ""), action: #selector(openInEditor(_:)), keyEquivalent: "")
             result.append(openInEditorItem)
         }
@@ -123,9 +122,9 @@ class FinderSync: FIFinderSync {
         let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.terminal.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
         // Try to open the app with the bundle Id
-        if (!Utilities.openApp(bundleId: bundleId)) {
+        if !Utilities.openApp(bundleId: bundleId) {
             // Warn the user if it failed
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your terminal.", comment: ""));
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your terminal.", comment: ""))
         }
     }
 
@@ -136,9 +135,9 @@ class FinderSync: FIFinderSync {
         let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
         let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
         // Try to open the app with the bundle Id
-        if (!Utilities.openApp(bundleId: bundleId)) {
+        if !Utilities.openApp(bundleId: bundleId) {
             // Warn the user if it failed
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""));
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""))
         }
     }
 
@@ -148,8 +147,8 @@ class FinderSync: FIFinderSync {
         let itemPaths = FIFinderSyncController.default().selectedItemURLs()
 
         // If no items are found, show an error
-        if itemPaths == nil && itemPaths!.count == 0 {
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to copy the path(s) to your clipboard.", comment: ""));
+        if itemPaths == nil && itemPaths!.isEmpty {
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to copy the path(s) to your clipboard.", comment: ""))
             return
         }
 
@@ -160,7 +159,7 @@ class FinderSync: FIFinderSync {
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         pasteboard.setString(paths.joined(separator: "\n"), forType: .string)
-        if (paths.count > 1) {
+        if paths.count > 1 {
             Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The paths are copied to your clipboard.", comment: ""))
         } else {
             Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The path is copied to your clipboard.", comment: ""))
@@ -174,7 +173,7 @@ class FinderSync: FIFinderSync {
 
         // If there is no workspace path, show an error
         if workspacePath == nil {
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to copy the path to your clipboard.", comment: ""));
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to copy the path to your clipboard.", comment: ""))
             return
         }
 
@@ -182,7 +181,6 @@ class FinderSync: FIFinderSync {
         let pasteboard = NSPasteboard.general
         pasteboard.clearContents()
         pasteboard.setString(workspacePath!.relativePath, forType: .string)
-        Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The path is copied to your clipboard.", comment: ""));
+        Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The path is copied to your clipboard.", comment: ""))
     }
 }
-

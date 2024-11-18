@@ -11,6 +11,8 @@
 		842C8F162CEB37250055DB9C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 842C8F142CEB33660055DB9C /* Localizable.xcstrings */; };
 		844A9EE12CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
 		844A9EE22CEA438600617787 /* Global.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 844A9EE02CEA438600617787 /* Global.xcconfig */; };
+		849AF73E2CEBC42D0095B2B1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 849AF73D2CEBC42D0095B2B1 /* .swiftlint.yml */; };
+		849AF73F2CEBC42D0095B2B1 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 849AF73D2CEBC42D0095B2B1 /* .swiftlint.yml */; };
 		84A106822CE623DA0081261A /* FinderTools.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84A1067A2CE623DA0081261A /* FinderTools.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,7 @@
 /* Begin PBXFileReference section */
 		842C8F142CEB33660055DB9C /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		844A9EE02CEA438600617787 /* Global.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Global.xcconfig; sourceTree = "<group>"; };
+		849AF73D2CEBC42D0095B2B1 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		84A106492CE60CFD0081261A /* Astrix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Astrix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A1067A2CE623DA0081261A /* FinderTools.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FinderTools.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -128,6 +131,7 @@
 		84A106402CE60CFD0081261A = {
 			isa = PBXGroup;
 			children = (
+				849AF73D2CEBC42D0095B2B1 /* .swiftlint.yml */,
 				842C8F132CEB332D0055DB9C /* Resources */,
 				844A9EDF2CEA435A00617787 /* Configuration */,
 				84A1064B2CE60CFD0081261A /* Astrix */,
@@ -152,6 +156,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 84A1065A2CE60CFE0081261A /* Build configuration list for PBXNativeTarget "Astrix" */;
 			buildPhases = (
+				849AF73B2CEBC2F00095B2B1 /* ShellScript */,
 				84A106452CE60CFD0081261A /* Sources */,
 				84A106462CE60CFD0081261A /* Frameworks */,
 				84A106472CE60CFD0081261A /* Resources */,
@@ -238,6 +243,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849AF73F2CEBC42D0095B2B1 /* .swiftlint.yml in Resources */,
 				844A9EE12CEA438600617787 /* Global.xcconfig in Resources */,
 				842C8F152CEB33660055DB9C /* Localizable.xcstrings in Resources */,
 			);
@@ -247,12 +253,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				849AF73E2CEBC42D0095B2B1 /* .swiftlint.yml in Resources */,
 				844A9EE22CEA438600617787 /* Global.xcconfig in Resources */,
 				842C8F162CEB37250055DB9C /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		849AF73B2CEBC2F00095B2B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/swiftlint.result",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ \"$(uname -m)\" == arm64 ]]\nthen\n    export PATH=\"/opt/homebrew/bin:$PATH\"\nfi\n\nif command -v swiftlint >/dev/null 2>&1\nthen\n    swiftlint\nelse\n    echo \"warning: `swiftlint` command not found - See https://github.com/realm/SwiftLint#installation for installation instructions.\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		84A106452CE60CFD0081261A /* Sources */ = {
@@ -417,6 +445,7 @@
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Astrix/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -450,6 +479,7 @@
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Astrix/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
@@ -480,6 +510,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinderTools/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FinderTools;
@@ -512,6 +543,7 @@
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinderTools/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = FinderTools;

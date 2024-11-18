@@ -82,9 +82,7 @@ struct OnboardingStepNotifications: View {
                 .animation(.snappy, value: description)
                 .contentTransition(.numericText(countsDown: true))
                 .padding(.bottom, 20)
-            Button(action: {
-                requestNotifications()
-            }) {
+            Button(action: requestNotifications) {
                 Text(buttonText)
                     .animation(.snappy, value: buttonText)
                     .contentTransition(.numericText(countsDown: true))

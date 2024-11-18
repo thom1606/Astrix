@@ -88,10 +88,10 @@ private struct NSPicker: NSViewRepresentable {
 
         // Create the SwiftUI view
         let pickerContent = NSPickerContent(size: size, title: selectedItemTitle)
-        
+
         // Create an NSHostingView with the SwiftUI view
         let hostingView = NSHostingView(rootView: pickerContent)
-        
+
         // Create the NSButton
         let button = NSButton(title: "", target: context.coordinator, action: #selector(context.coordinator.buttonClicked))
         button.bezelStyle = .regularSquare
@@ -99,10 +99,10 @@ private struct NSPicker: NSViewRepresentable {
         button.wantsLayer = true
         button.layer?.backgroundColor = NSColor.clear.cgColor
         context.coordinator.button = button
-        
+
         // Add the hosting view as a subview of the button
         button.addSubview(hostingView)
-        
+
         // Set constraints for the hosting view to match the button's size
         hostingView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -120,7 +120,7 @@ private struct NSPicker: NSViewRepresentable {
             button.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             button.heightAnchor.constraint(equalToConstant: size.value)
         ])
-        
+
         // Set constraints for the view to match the provided frame size
         view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([

@@ -76,59 +76,63 @@ struct MainButtonStyle: ButtonStyle {
         return 20
     }
 
+    func makeBackground(_ configuration: Configuration) -> some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 500)
+                .fill(Color("ElementsLightenBackground"))
+                .blendMode(.lighten)
+            RoundedRectangle(cornerRadius: 500)
+                .fill(Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.18))
+                .blendMode(.colorDodge)
+            if errored {
+                RoundedRectangle(cornerRadius: 500)
+                    .fill(.red.opacity(0.3))
+                    .blendMode(.plusDarker)
+            }
+            Rectangle()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(colors: [
+                            Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.14),
+                            Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0)
+                        ]),
+                        center: .bottom,
+                        startRadius: 0,
+                        endRadius: size.value / 2
+                    )
+                )
+                .frame(width: size.value, height: size.value)
+                .scaleEffect(x: 3, y: 1, anchor: .bottom)
+                .blendMode(.colorDodge)
+                .opacity(configuration.isPressed || isHovered ? 1 : 0)
+                .animation(.easeInOut(duration: 0.2), value: (configuration.isPressed || isHovered) && isEnabled)
+            Rectangle()
+                .fill(
+                    RadialGradient(
+                        gradient: Gradient(colors: [
+                            Color(NSColor.labelColor).opacity(0.07),
+                            Color(NSColor.labelColor).opacity(0)
+                        ]),
+                        center: .bottom,
+                        startRadius: 0,
+                        endRadius: size.value / 2
+                    )
+                )
+                .frame(width: size.value, height: size.value)
+                .scaleEffect(x: 3, y: 1, anchor: .top)
+                .blendMode(.normal)
+                .opacity(configuration.isPressed || isHovered ? 1 : 0)
+                .animation(.easeInOut(duration: 0.2), value: (configuration.isPressed || isHovered) && isEnabled)
+        }
+    }
+
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(height: size.value)
             .frame(maxWidth: fullWidth ? .infinity : nil)
             .padding(.horizontal, horizontalPadding)
             .background(
-                ZStack {
-                    RoundedRectangle(cornerRadius: 500)
-                        .fill(Color("ElementsLightenBackground"))
-                        .blendMode(.lighten)
-                    RoundedRectangle(cornerRadius: 500)
-                        .fill(Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.18))
-                        .blendMode(.colorDodge)
-                    if errored {
-                        RoundedRectangle(cornerRadius: 500)
-                            .fill(.red.opacity(0.3))
-                            .blendMode(.plusDarker)
-                    }
-                    Rectangle()
-                        .fill(
-                            RadialGradient(
-                                gradient: Gradient(colors: [
-                                    Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0.14),
-                                    Color(red: 0.37, green: 0.37, blue: 0.37).opacity(0)
-                                ]),
-                                center: .bottom,
-                                startRadius: 0,
-                                endRadius: size.value / 2
-                            )
-                        )
-                        .frame(width: size.value, height: size.value)
-                        .scaleEffect(x: 3, y: 1, anchor: .bottom)
-                        .blendMode(.colorDodge)
-                        .opacity(configuration.isPressed || isHovered ? 1 : 0)
-                        .animation(.easeInOut(duration: 0.2), value: (configuration.isPressed || isHovered) && isEnabled)
-                    Rectangle()
-                        .fill(
-                            RadialGradient(
-                                gradient: Gradient(colors: [
-                                    Color(NSColor.labelColor).opacity(0.07),
-                                    Color(NSColor.labelColor).opacity(0)
-                                ]),
-                                center: .bottom,
-                                startRadius: 0,
-                                endRadius: size.value / 2
-                            )
-                        )
-                        .frame(width: size.value, height: size.value)
-                        .scaleEffect(x: 3, y: 1, anchor: .top)
-                        .blendMode(.normal)
-                        .opacity(configuration.isPressed || isHovered ? 1 : 0)
-                        .animation(.easeInOut(duration: 0.2), value: (configuration.isPressed || isHovered) && isEnabled)
-                }
+                makeBackground(configuration)
             )
             .foregroundColor(isEnabled ? Color(NSColor.labelColor) : Color(NSColor.tertiaryLabelColor))
             .clipShape(RoundedRectangle(cornerRadius: 500))

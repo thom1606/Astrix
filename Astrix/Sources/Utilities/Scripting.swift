@@ -14,14 +14,14 @@ class Scripting {
 
     private func getFinderExScriptPath() throws -> URL {
         guard var scriptFolderPath = try? FileManager.default.url(for: .applicationScriptsDirectory, in: .userDomainMask, appropriateFor: nil, create: true) else {
-            throw NSError(domain: "AstrixScriptingError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Scripts folder couldn't be created!"]);
+            throw NSError(domain: "AstrixScriptingError", code: 1, userInfo: [NSLocalizedDescriptionKey: "Scripts folder couldn't be created!"])
         }
-        scriptFolderPath.deleteLastPathComponent();
-        let finderExScriptPath = scriptFolderPath.appendingPathComponent(Constants.Id.FinderExtension);
+        scriptFolderPath.deleteLastPathComponent()
+        let finderExScriptPath = scriptFolderPath.appendingPathComponent(Constants.Id.FinderExtension)
         if !FileManager.default.fileExists(atPath: finderExScriptPath.path) {
-            try FileManager.default.createDirectory(atPath: finderExScriptPath.path, withIntermediateDirectories: true, attributes: nil);
+            try FileManager.default.createDirectory(atPath: finderExScriptPath.path, withIntermediateDirectories: true, attributes: nil)
         }
-        return finderExScriptPath;
+        return finderExScriptPath
     }
 
     public func updateSystemScripts() throws {
@@ -39,12 +39,12 @@ class Scripting {
         }
 
         // Get the scripting path
-        let scriptsFolderPath = try getFinderExScriptPath();
+        let scriptsFolderPath = try getFinderExScriptPath()
 
         // write system scripts
         let toolsPath = scriptsFolderPath
             .appendingPathComponent(Constants.Scripting.ToolsFileName)
-            .appendingPathExtension(Constants.Scripting.ToolsFileExtension);
+            .appendingPathExtension(Constants.Scripting.ToolsFileExtension)
         let toolsScript = """
             on runCommand(command)
                 tell application "Finder"
@@ -52,8 +52,8 @@ class Scripting {
                     do shell script command
                 end tell
             end runCommand
-            """;
-        try writeScriptIfNeeded(at: toolsPath, with: toolsScript);
+            """
+        try writeScriptIfNeeded(at: toolsPath, with: toolsScript)
     }
 
     public func getScriptURL(name: String) -> URL? {
@@ -88,19 +88,15 @@ class Scripting {
 
     public func getFirstInstalledEditor() -> SupportedApps {
         let editors: [SupportedApps] = [.cursor, .vsCodeInsiders, .vsCode, .atom, .sublime, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode]
-        for editor in editors {
-            if isAppInstalled(bundleIdentifier: editor.rawValue) {
-                return editor
-            }
+        for editor in editors where isAppInstalled(bundleIdentifier: editor.rawValue) {
+            return editor
         }
         return .none
     }
     public func getFirstInstalledTerminal() -> SupportedApps {
         let terminals: [SupportedApps] = [.iTerm, .hyper, .terminal]
-        for terminal in terminals {
-            if isAppInstalled(bundleIdentifier: terminal.rawValue) {
-                return terminal
-            }
+        for terminal in terminals where isAppInstalled(bundleIdentifier: terminal.rawValue) {
+            return terminal
         }
         return .terminal
     }
