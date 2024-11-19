@@ -55,7 +55,7 @@ public enum SupportedApps: String, CaseIterable {
     case hyper = "co.zeit.hyper"
     // MARK: - Editors
     case none = "NONE"
-    case xcode = "com.apple.Xcode"
+    case xcode = "com.apple.dt.Xcode"
     case vsCode = "com.microsoft.VSCode"
     case vsCodeInsiders = "com.microsoft.VSCodeInsiders"
     case atom = "com.github.atom"

@@ -45,99 +45,33 @@ class FinderSync: FIFinderSync {
 
         switch menuKind {
             case .contextualMenuForContainer,
-            .contextualMenuForItems:
-                    let itemPaths = FIFinderSyncController.default().selectedItemURLs()
-                let workspacePath = FIFinderSyncController.default().targetedURL()
-
+                .contextualMenuForItems:
                 let astrixMenu = NSMenu(title: "")
 
-                // Check if there are any selected files which could be copied to the clipboard
-                if itemPaths != nil && !itemPaths!.isEmpty {
-                    if itemPaths!.first!.relativePath != workspacePath?.relativePath {
-                        // Create items menu title
-                        astrixMenu.addItem(Utilities.createTitleItem(title: "Item"))
+                addSection(ItemSection(), to: astrixMenu)
+                addSection(WorkspaceSection(), to: astrixMenu)
 
-                        // Create the copy path for the items
-                        var title = NSLocalizedString("Copy Path", comment: "")
-                        if itemPaths!.count > 1 {
-                            title = NSLocalizedString("Copy Paths", comment: "")
-                        }
-                        let copyPathItem = NSMenuItem(title: title, action: #selector(copyItemPath(_:)), keyEquivalent: "")
-                        astrixMenu.addItem(copyPathItem)
-                    }
-                }
-
-                // Create workspace menu title
-                astrixMenu.addItem(Utilities.createTitleItem(title: "Workspace"))
-
-                // Add all the workspace items
-                for item in getWorkspaceItems() {
-                    astrixMenu.addItem(item)
-                }
-
+                // Create the main menu button
                 let mainMenuItem = NSMenuItem(title: "Astrix", action: nil, keyEquivalent: "")
                 mainMenuItem.submenu = astrixMenu
                 menu.addItem(mainMenuItem)
             case .toolbarItemMenu:
-                for item in getWorkspaceItems() {
-                    menu.addItem(item)
-                }
+                addSection(WorkspaceSection(), to: menu)
+                addSection(SuggestionsSection(), to: menu)
             default:
                 return nil
         }
-
         return menu
     }
 
-    private func getWorkspaceItems() -> [NSMenuItem] {
-        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        let terminalKey = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.none.rawValue
-        let editorKey = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
-
-        var result: [NSMenuItem] = []
-
-        // Open a terminal in this workspace
-        if terminalKey != SupportedApps.none.rawValue {
-            let openInTerminalItem = NSMenuItem(title: NSLocalizedString("Open in Terminal", comment: ""), action: #selector(openInTerminal(_:)), keyEquivalent: "")
-            result.append(openInTerminalItem)
-        }
-        // Open the editor in this workspace
-        if editorKey != SupportedApps.none.rawValue {
-            let openInEditorItem = NSMenuItem(title: NSLocalizedString("Open in Editor", comment: ""), action: #selector(openInEditor(_:)), keyEquivalent: "")
-            result.append(openInEditorItem)
+    private func addSection(_ section: AstrixSection, to menu: NSMenu, showTitle: Bool = true) {
+        let items = section.getSectionItems()
+        if showTitle && !items.isEmpty {
+            menu.addItem(Utilities.createTitleItem(title: section.sectionName))
         }
 
-        // Copy the path of the current workspace
-        let copyPathItem = NSMenuItem(title: NSLocalizedString("Copy Workspace Path", comment: ""), action: #selector(copyWorkspacePath(_:)), keyEquivalent: "")
-        result.append(copyPathItem)
-
-        return result
-    }
-
-    // MARK: -- Actions
-    /// Open the current workspace in a new  terminal
-    @objc func openInTerminal(_ sender: AnyObject?) {
-        // Get the preferred terminal
-        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.terminal.rawValue
-        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
-        // Try to open the app with the bundle Id
-        if !Utilities.openApp(bundleId: bundleId) {
-            // Warn the user if it failed
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your terminal.", comment: ""))
-        }
-    }
-
-    /// Open the current workspace in the users preferred editor
-    @objc func openInEditor(_ sender: AnyObject?) {
-        // Get the preferred editor
-        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
-        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
-        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
-        // Try to open the app with the bundle Id
-        if !Utilities.openApp(bundleId: bundleId) {
-            // Warn the user if it failed
-            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""))
+        for item in items {
+            menu.addItem(item)
         }
     }
 
@@ -166,8 +100,35 @@ class FinderSync: FIFinderSync {
         }
     }
 
+    // MARK: -- Workspace Actions
+    /// Open the current workspace in the users preferred terminal
+    @objc public func openInTerminal(_ sender: AnyObject?) {
+        // Get the preferred terminal
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
+        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultTerminalKey) ?? SupportedApps.terminal.rawValue
+        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .terminal
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: bundleId) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your terminal.", comment: ""))
+        }
+    }
+
+    /// Open the current workspace in the users preferred editor
+    @objc open func openInEditor(_ sender: AnyObject?) {
+        // Get the preferred editor
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
+        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
+        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: bundleId) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""))
+        }
+    }
+
     /// Copy the path of the workspace folder
-    @objc func copyWorkspacePath(_ sender: AnyObject?) {
+    @objc open func copyWorkspacePath(_ sender: AnyObject?) {
         // Get the workspace path
         let workspacePath = FIFinderSyncController.default().targetedURL()
 
@@ -182,5 +143,49 @@ class FinderSync: FIFinderSync {
         pasteboard.clearContents()
         pasteboard.setString(workspacePath!.relativePath, forType: .string)
         Utilities.showNotification(title: NSLocalizedString("Copied!", comment: ""), body: NSLocalizedString("The path is copied to your clipboard.", comment: ""))
+    }
+
+    // MARK: -- Item Actions
+    /// Open the current selected file/folder in the users preferred editor
+    @objc open func openItemInEditor(_ sender: AnyObject?) {
+        // Get the preferred editor
+        let userDefaults = UserDefaults(suiteName: Constants.Id.DefaultsDomain)
+        let bundleIdString = userDefaults?.string(forKey: Constants.Id.DefaultEditorKey) ?? SupportedApps.none.rawValue
+        let bundleId = SupportedApps(rawValue: bundleIdString) ?? .none
+        // Try to open the app with the bundle Id
+        if !Utilities.openSelectedInApp(bundleId: bundleId) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open your editor of choice.", comment: ""))
+        }
+    }
+
+    // MARK: -- Suggestion Actions
+    @objc func openInVSCode(_ sender: Any) {
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: .vsCode) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open the workspace in \(Utilities.getBundleApplicationName(bundleId: .vsCode)).", comment: ""))
+        }
+    }
+    @objc func openInVSCodeInsiders(_ sender: Any) {
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: .vsCodeInsiders) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open the workspace in \(Utilities.getBundleApplicationName(bundleId: .vsCodeInsiders)).", comment: ""))
+        }
+    }
+    @objc func openInCursor(_ sender: Any) {
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: .cursor) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open the workspace in \(Utilities.getBundleApplicationName(bundleId: .cursor)).", comment: ""))
+        }
+    }
+    @objc func openInXCode(_ sender: Any) {
+        // Try to open the app with the bundle Id
+        if !Utilities.openWorkspaceInApp(bundleId: .xcode) {
+            // Warn the user if it failed
+            Utilities.showNotification(title: NSLocalizedString("Oops!", comment: ""), body: NSLocalizedString("We were not able to open the workspace in \(Utilities.getBundleApplicationName(bundleId: .xcode)).", comment: ""))
+        }
     }
 }

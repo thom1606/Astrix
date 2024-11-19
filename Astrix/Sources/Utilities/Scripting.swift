@@ -47,10 +47,7 @@ class Scripting {
             .appendingPathExtension(Constants.Scripting.ToolsFileExtension)
         let toolsScript = """
             on runCommand(command)
-                tell application "Finder"
-                    activate
-                    do shell script command
-                end tell
+                do shell script command
             end runCommand
             """
         try writeScriptIfNeeded(at: toolsPath, with: toolsScript)
@@ -81,7 +78,7 @@ class Scripting {
         return event
     }
 
-    private func isAppInstalled(bundleIdentifier: String) -> Bool {
+    public func isAppInstalled(bundleIdentifier: String) -> Bool {
         let workspace = NSWorkspace.shared
         return workspace.urlForApplication(withBundleIdentifier: bundleIdentifier) != nil
     }

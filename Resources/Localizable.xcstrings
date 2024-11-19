@@ -31,26 +31,6 @@
         }
       }
     },
-    "Copy Path" : {
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kopieer pad"
-          }
-        }
-      }
-    },
-    "Copy Paths" : {
-      "localizations" : {
-        "nl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Kopieer paden"
-          }
-        }
-      }
-    },
     "Copy Workspace Path" : {
       "localizations" : {
         "nl" : {
@@ -128,6 +108,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Even wachten!"
+          }
+        }
+      }
+    },
+    "Item" : {
+      "comment" : "Item section",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Item"
           }
         }
       }
@@ -252,6 +243,17 @@
         }
       }
     },
+    "Suggestions" : {
+      "comment" : "Suggestions section",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suggesties"
+          }
+        }
+      }
+    },
     "The path is copied to your clipboard." : {
       "localizations" : {
         "nl" : {
@@ -358,6 +360,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Welkom bij Astrix"
+          }
+        }
+      }
+    },
+    "Workspace" : {
+      "comment" : "Workspace section",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Folder"
           }
         }
       }
