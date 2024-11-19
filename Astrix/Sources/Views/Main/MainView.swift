@@ -57,6 +57,8 @@ struct MainView: View {
     func load() {
         // Check if the notifications are correctly set up
         checkNotificationPermissionStatus()
+        // Update the scripting api
+        try? Scripting.shared.updateSystemScripts()
         // Check if there are any updates available to download
         checkForUpdates()
     }
