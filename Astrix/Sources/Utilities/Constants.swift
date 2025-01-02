@@ -43,7 +43,8 @@ struct Constants {
             (.none, "None"),
             (.terminal, "Terminal"),
             (.iTerm, "iTerm"),
-            (.hyper, "Hyper")
+            (.hyper, "Hyper"),
+            (.ghostty, "Ghostty")
         ]
     }
 }
@@ -53,6 +54,7 @@ public enum SupportedApps: String, CaseIterable {
     case terminal = "com.apple.Terminal"
     case iTerm = "com.googlecode.iterm2"
     case hyper = "co.zeit.hyper"
+    case ghostty = "com.mitchellh.ghostty"
     // MARK: - Editors
     case none = "NONE"
     case xcode = "com.apple.dt.Xcode"
