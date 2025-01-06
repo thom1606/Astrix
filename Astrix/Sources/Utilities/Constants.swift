@@ -26,6 +26,7 @@ struct Constants {
         static let ToolsFileExtension = "scpt"
         static let SupportedEditorApplications: [(SupportedApps, String)] = [
             (.none, "None"),
+            (.zed, "Zed"),
             (.xcode, "XCode"),
             (.vsCode, "Visual Studio Code"),
             (.vsCodeInsiders, "Visual Studio Code (Insiders)"),
@@ -44,7 +45,10 @@ struct Constants {
             (.terminal, "Terminal"),
             (.iTerm, "iTerm"),
             (.hyper, "Hyper"),
-            (.ghostty, "Ghostty")
+            (.ghostty, "Ghostty"),
+            (.warp, "Warp"),
+            (.kitty, "Kitty"),
+            (.alacritty, "Alacritty")
         ]
     }
 }
@@ -55,8 +59,12 @@ public enum SupportedApps: String, CaseIterable {
     case iTerm = "com.googlecode.iterm2"
     case hyper = "co.zeit.hyper"
     case ghostty = "com.mitchellh.ghostty"
+    case warp = "dev.warp.Warp-Stable"
+    case kitty = "net.kovidgoyal.kitty"
+    case alacritty = "org.alacritty"
     // MARK: - Editors
     case none = "NONE"
+    case zed = "dev.zed.Zed"
     case xcode = "com.apple.dt.Xcode"
     case vsCode = "com.microsoft.VSCode"
     case vsCodeInsiders = "com.microsoft.VSCodeInsiders"

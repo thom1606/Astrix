@@ -84,14 +84,14 @@ class Scripting {
     }
 
     public func getFirstInstalledEditor() -> SupportedApps {
-        let editors: [SupportedApps] = [.cursor, .vsCodeInsiders, .vsCode, .atom, .sublime, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode, .androidStudio]
+        let editors: [SupportedApps] = [.cursor, .zed, .vsCodeInsiders, .vsCode, .atom, .sublime, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode, .androidStudio]
         for editor in editors where isAppInstalled(bundleIdentifier: editor.rawValue) {
             return editor
         }
         return .none
     }
     public func getFirstInstalledTerminal() -> SupportedApps {
-        let terminals: [SupportedApps] = [.ghostty, .iTerm, .hyper, .terminal]
+        let terminals: [SupportedApps] = [.ghostty, .warp, .kitty, .alacritty, .iTerm, .hyper, .terminal]
         for terminal in terminals where isAppInstalled(bundleIdentifier: terminal.rawValue) {
             return terminal
         }
