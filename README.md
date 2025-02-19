@@ -5,7 +5,7 @@ Welcome to **Astrix**! Your one-stop solution for easy finder management. This p
 
 ## Project Overview
 
-Astrix is a macOS finder extension which adds a button to your finder toolbar. With this button have the possibility to open that specific folder in your editor/terminal of choice. To get started with Astrix, you can simply open the app, walk through the onboarding and Astrix will be ready in your Finder app.
+Astrix is a macOS finder extension which adds a button to your finder toolbar. With this button you have the possibility to open that specific folder in your editor/terminal of choice. To get started with Astrix, you can simply open the app, walk through the onboarding and Astrix will be ready in your Finder app.
 
 The application is built using SwiftUI and Swift and is available for macOS 14.0 and above.
 
