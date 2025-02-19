@@ -5,9 +5,11 @@ Welcome to **Astrix**! Your one-stop solution for easy finder management. This p
 
 ## Project Overview
 
-Astrix is a MacOS finder extension which allows you to open your files and folders in your favorite editors and terminals. It provides a simple and easy-to-use interface that allows you to quickly open your files and folders in your favorite editors and terminals. To get started with Astrix, you can simply open the app, walk trough the onboarding and Astrix will be ready in your Finder app.
+Astrix is a macOS finder extension which adds a button to your finder toolbar. With this button have the possibility to open that specific folder in your editor/terminal of choice. To get started with Astrix, you can simply open the app, walk through the onboarding and Astrix will be ready in your Finder app.
 
-The application is built using SwiftUI and Swift and is available for MacOS 14.0 and above.
+The application is built using SwiftUI and Swift and is available for macOS 14.0 and above.
+
+![Preview](./assets/astrix-readme-preview.png)
 
 ## Getting Started
 
@@ -16,6 +18,13 @@ The application is built using SwiftUI and Swift and is available for MacOS 14.0
 3. Open the app and follow the onboarding steps.
 4. Once the onboarding is complete, you can start using Astrix in your Finder app.
 5. If you are not able to see the Astrix app in your Finder app, you can enable it by right clicking on the `Finder toolbar` > `Customize toolbar` > and selecting the Astrix app.
+
+## Features
+
+- Open your current folder in your editor of choice.
+- Open your current folder in your terminal of choice.
+- We suggest you to open in editors based on the contents of the folder (XCode, VSCode, Cursor).
+- Open the current folder path.
 
 ## Sponsorship
 
