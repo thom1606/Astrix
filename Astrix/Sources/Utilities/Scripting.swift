@@ -84,7 +84,7 @@ class Scripting {
     }
 
     public func getFirstInstalledEditor() -> SupportedApps {
-        let editors: [SupportedApps] = [.cursor, .zed, .vsCodeInsiders, .vsCode, .atom, .sublime, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode, .androidStudio]
+        let editors: [SupportedApps] = [.cursor, .zed, .vsCodeInsiders, .vsCode, .atom, .sublime4, .sublime3, .intelliJ, .phpStorm, .pyCharm, .rubyMine, .webStorm, .xcode, .androidStudio]
         for editor in editors where isAppInstalled(bundleIdentifier: editor.rawValue) {
             return editor
         }

@@ -31,7 +31,8 @@ struct Constants {
             (.vsCode, "Visual Studio Code"),
             (.vsCodeInsiders, "Visual Studio Code (Insiders)"),
             (.atom, "Atom"),
-            (.sublime, "Sublime Text"),
+            (.sublime4, "Sublime Text 4"),
+            (.sublime3, "Sublime Text 3"),
             (.cursor, "Cursor"),
             (.intelliJ, "IntelliJ IDEA"),
             (.phpStorm, "PhpStorm"),
@@ -69,7 +70,8 @@ public enum SupportedApps: String, CaseIterable {
     case vsCode = "com.microsoft.VSCode"
     case vsCodeInsiders = "com.microsoft.VSCodeInsiders"
     case atom = "com.github.atom"
-    case sublime = "com.sublimetext.3"
+    case sublime4 = "com.sublimetext.4"
+    case sublime3 = "com.sublimetext.3"
     case cursor = "com.todesktop.230313mzl4w4u92"
     case intelliJ = "com.jetbrains.intellij"
     case phpStorm = "com.jetbrains.PhpStorm"
