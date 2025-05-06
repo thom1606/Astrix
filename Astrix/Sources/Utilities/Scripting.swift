@@ -91,7 +91,7 @@ class Scripting {
         return .none
     }
     public func getFirstInstalledTerminal() -> SupportedApps {
-        let terminals: [SupportedApps] = [.ghostty, .warp, .kitty, .alacritty, .iTerm, .hyper, .terminal]
+        let terminals: [SupportedApps] = [.ghostty, .warp, .kitty, .alacritty, .wezTerm, .iTerm, .hyper, .terminal]
         for terminal in terminals where isAppInstalled(bundleIdentifier: terminal.rawValue) {
             return terminal
         }
