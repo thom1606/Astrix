@@ -6,7 +6,5 @@
 	<array>
 		<string>$(TeamIdentifierPrefix)com.thom1606.Astrix</string>
 	</array>
-	<key>com.apple.security.automation.apple-events</key>
-	<true/>
 </dict>
 </plist>

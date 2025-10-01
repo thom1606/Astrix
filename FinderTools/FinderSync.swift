@@ -38,11 +38,11 @@ class FinderSync: FIFinderSync {
         return resize(image: image, w: 19, h: 19)
     }
 
-    func resize(image: NSImage, w: Int, h: Int) -> NSImage {
-        let destSize = NSMakeSize(CGFloat(w), CGFloat(h))
+    func resize(image: NSImage, w width: Int, h height: Int) -> NSImage {
+        let destSize = NSSize(width: CGFloat(width), height: CGFloat(height))
         let newImage = NSImage(size: destSize)
         newImage.lockFocus()
-        image.draw(in: NSMakeRect(0, 0, destSize.width, destSize.height), from: NSMakeRect(0, 0, image.size.width, image.size.height), operation: .sourceOver, fraction: CGFloat(1))
+        image.draw(in: NSRect(x: 0, y: 0, width: destSize.width, height: destSize.height), from: NSRect(x: 0, y: 0, width: image.size.width, height: image.size.height), operation: .sourceOver, fraction: 1.0)
         newImage.unlockFocus()
         newImage.size = destSize
         return newImage

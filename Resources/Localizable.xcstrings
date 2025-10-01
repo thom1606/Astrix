@@ -11,6 +11,12 @@
         }
       }
     },
+    "Astrix" : {
+
+    },
+    "Check for Updates…" : {
+
+    },
     "Continue" : {
       "localizations" : {
         "nl" : {
@@ -134,6 +140,7 @@
       }
     },
     "New update available" : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {
@@ -275,6 +282,7 @@
       }
     },
     "There is a new update available for Astrix! Please download the latest version to enjoy new features and improvements." : {
+      "extractionState" : "stale",
       "localizations" : {
         "nl" : {
           "stringUnit" : {

@@ -7,10 +7,13 @@
 
 import SwiftUI
 import UserNotifications
+import Sparkle
 
 struct MainView: View {
     @AppStorage(Constants.Id.DefaultEditorKey, store: UserDefaults(suiteName: Constants.Id.DefaultsDomain)) private var defaultEditor = Scripting.shared.getFirstInstalledEditor().rawValue
     @AppStorage(Constants.Id.DefaultTerminalKey, store: UserDefaults(suiteName: Constants.Id.DefaultsDomain)) private var defaultTerminal = Scripting.shared.getFirstInstalledTerminal().rawValue
+
+    var updater: SPUUpdater
 
     @State private var notificationPermissionStatus: UNAuthorizationStatus = .notDetermined
     @State private var isNewUpdateAvailable = false
@@ -31,36 +34,12 @@ struct MainView: View {
             checkNotificationPermissionStatus()
         }
     }
-    // Check for available updates
-    func checkForUpdates() {
-        // get app version from Info.plist
-        guard let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            print("Failed to get app version")
-            return
-        }
-        let encodedAppVersion = appVersion.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? appVersion
-        let updateURL = URL(string: "https://astrix.thomvandenbroek.com/api/update?version=\(encodedAppVersion)")!
-        URLSession.shared.dataTask(with: updateURL) { _, response, error in
-            guard error == nil else {
-                print("Failed to check for updates: \(error?.localizedDescription ?? "Unknown error")")
-                return
-            }
-            // Check if the current version is the latest available
-            if let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                DispatchQueue.main.async {
-                    isNewUpdateAvailable = true
-                }
-            }
-        }.resume()
-    }
 
     func load() {
         // Check if the notifications are correctly set up
         checkNotificationPermissionStatus()
         // Update the scripting api
         try? Scripting.shared.updateSystemScripts()
-        // Check if there are any updates available to download
-        checkForUpdates()
     }
 
     var body: some View {
@@ -85,16 +64,6 @@ struct MainView: View {
                         }
                         .buttonStyle(MainButtonStyle(fullWidth: true))
                     }
-
-                    if isNewUpdateAvailable {
-                        Seperator()
-                        Text("There is a new update available for Astrix! Please download the latest version to enjoy new features and improvements.")
-                            .foregroundStyle(Color(NSColor.secondaryLabelColor))
-                            .font(.system(size: 19, weight: .regular))
-                        Link("New update available", destination: URL(string: "https://astrix.thomvandenbroek.com/download")!)
-                            .buttonStyle(MainButtonStyle(fullWidth: true))
-                    }
-
                     Rectangle()
                         .fill(.clear)
                         .frame(width: 30, height: 24)
@@ -107,5 +76,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    let mockUpdater = SPUStandardUpdaterController(startingUpdater: false, updaterDelegate: nil, userDriverDelegate: nil).updater
+    MainView(updater: mockUpdater)
 }
