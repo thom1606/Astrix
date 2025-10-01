@@ -15,7 +15,11 @@ struct Constants {
             }
             return identifier
         }()
+        #if DEBUG
+        static let FinderExtension = "com.thom1606.Astrix.FinderTools.Dev"
+        #else
         static let FinderExtension = "com.thom1606.Astrix.FinderTools"
+        #endif
         static let DefaultsDomain = "\(Constants.Id.teamIdentifier).com.thom1606.Astrix"
         static let DefaultTerminalKey = "defaultTerminal"
         static let DefaultEditorKey = "defaultEditor"

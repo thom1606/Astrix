@@ -35,7 +35,17 @@ class FinderSync: FIFinderSync {
     override var toolbarItemImage: NSImage {
         let image = NSImage(named: "icon-template")!
         image.isTemplate = true
-        return image
+        return resize(image: image, w: 19, h: 19)
+    }
+
+    func resize(image: NSImage, w: Int, h: Int) -> NSImage {
+        let destSize = NSMakeSize(CGFloat(w), CGFloat(h))
+        let newImage = NSImage(size: destSize)
+        newImage.lockFocus()
+        image.draw(in: NSMakeRect(0, 0, destSize.width, destSize.height), from: NSMakeRect(0, 0, image.size.width, image.size.height), operation: .sourceOver, fraction: CGFloat(1))
+        newImage.unlockFocus()
+        newImage.size = destSize
+        return newImage
     }
 
     override func menu(for menuKind: FIMenuKind) -> NSMenu? {
