@@ -34,6 +34,7 @@ struct Constants {
             (.xcode, "XCode"),
             (.vsCode, "Visual Studio Code"),
             (.vsCodeInsiders, "Visual Studio Code (Insiders)"),
+            (.antigravity, "Antigravity"),
             (.atom, "Atom"),
             (.sublime4, "Sublime Text 4"),
             (.sublime3, "Sublime Text 3"),
@@ -79,6 +80,7 @@ public enum SupportedApps: String, CaseIterable {
     case sublime4 = "com.sublimetext.4"
     case sublime3 = "com.sublimetext.3"
     case cursor = "com.todesktop.230313mzl4w4u92"
+    case antigravity = "com.google.antigravity"
     case intelliJ = "com.jetbrains.intellij"
     case phpStorm = "com.jetbrains.PhpStorm"
     case pyCharm = "com.jetbrains.pycharm"
