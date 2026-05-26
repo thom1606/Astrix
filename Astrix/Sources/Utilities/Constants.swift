@@ -31,6 +31,7 @@ struct Constants {
         static let SupportedEditorApplications: [(SupportedApps, String)] = [
             (.none, "None"),
             (.zed, "Zed"),
+            (.zedPreview, "Zed Preview"),
             (.xcode, "XCode"),
             (.vsCode, "Visual Studio Code"),
             (.vsCodeInsiders, "Visual Studio Code (Insiders)"),
@@ -73,6 +74,7 @@ public enum SupportedApps: String, CaseIterable {
     // MARK: - Editors
     case none = "NONE"
     case zed = "dev.zed.Zed"
+    case zedPreview = "dev.zed.Zed-Preview"
     case xcode = "com.apple.dt.Xcode"
     case vsCode = "com.microsoft.VSCode"
     case vsCodeInsiders = "com.microsoft.VSCodeInsiders"
