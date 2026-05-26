@@ -55,7 +55,8 @@ struct Constants {
             (.warp, "Warp"),
             (.kitty, "Kitty"),
             (.alacritty, "Alacritty"),
-            (.wezTerm, "WezTerm")
+            (.wezTerm, "WezTerm"),
+            (.cmux, "cmux")
         ]
     }
 }
@@ -70,6 +71,7 @@ public enum SupportedApps: String, CaseIterable {
     case kitty = "net.kovidgoyal.kitty"
     case alacritty = "org.alacritty"
     case wezTerm = "com.github.wez.wezterm"
+    case cmux = "com.cmuxterm.app"
     // MARK: - Editors
     case none = "NONE"
     case zed = "dev.zed.Zed"
