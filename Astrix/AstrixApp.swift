@@ -169,10 +169,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // A hosting view that reports no safe-area insets, so the onboarding content
         // fills the entire window (under the transparent title bar) with no offset —
         // this keeps it horizontally centered and the decorations flush at the bottom.
-        window.contentView = FullBleedHostingView(rootView: OnboardingView { [weak window] in
+        window.contentView = FullBleedHostingView(rootView: AnyView(OnboardingView { [weak window] in
             UserDefaults.astrixShared.set(true, forKey: Constants.DefaultsKey.hasCompletedOnboarding)
             window?.close()
-        })
+        }))
         onboardingWindow = window
 
         // Stay an accessory (LSUIElement) app so the onboarding window never adds a
@@ -229,7 +229,11 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 /// An `NSHostingView` that ignores safe-area insets, letting SwiftUI content fill
 /// the whole window (including under a transparent title bar) with no offset.
-private final class FullBleedHostingView<Content: View>: NSHostingView<Content> {
+///
+/// Deliberately non-generic (hosts `AnyView`): a generic `NSHostingView` subclass
+/// crashes the Swift 6.3 SIL optimizer (EarlyPerfInliner) on its implicit deinit in
+/// `-O` Release builds. AnyView erasure sidesteps the generic-layout codepath.
+private final class FullBleedHostingView: NSHostingView<AnyView> {
     override var safeAreaInsets: NSEdgeInsets { NSEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) }
 }
 
