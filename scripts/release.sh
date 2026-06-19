@@ -98,6 +98,21 @@ fi
 rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
+# A fresh CI runner has no cached provisioning profiles, so automatic signing
+# must create/download them from the portal via the App Store Connect API key.
+# (The key needs App Manager access to manage profiles.) Locally the profiles
+# are already cached, so these args are a harmless no-op. Only added when the
+# ASC key is present — local SKIP_NOTARIZE smoke tests run without it.
+PROVISION_ARGS=()
+if [ -n "${ASC_API_KEY_PATH:-}" ] && [ -n "${ASC_API_KEY_ID:-}" ] && [ -n "${ASC_API_ISSUER_ID:-}" ]; then
+  PROVISION_ARGS=(
+    -allowProvisioningUpdates
+    -authenticationKeyPath "$ASC_API_KEY_PATH"
+    -authenticationKeyID "$ASC_API_KEY_ID"
+    -authenticationKeyIssuerID "$ASC_API_ISSUER_ID"
+  )
+fi
+
 log "Archiving…"
 xcodebuild archive \
   -project "$PROJECT" \
@@ -105,13 +120,15 @@ xcodebuild archive \
   -configuration "$CONFIGURATION" \
   -archivePath "$ARCHIVE_PATH" \
   -destination 'generic/platform=macOS' \
-  CODE_SIGN_STYLE=Automatic
+  CODE_SIGN_STYLE=Automatic \
+  ${PROVISION_ARGS[@]+"${PROVISION_ARGS[@]}"}
 
 log "Exporting (Developer ID)…"
 xcodebuild -exportArchive \
   -archivePath "$ARCHIVE_PATH" \
   -exportPath "$EXPORT_DIR" \
-  -exportOptionsPlist "$SCRIPT_DIR/ExportOptions.plist"
+  -exportOptionsPlist "$SCRIPT_DIR/ExportOptions.plist" \
+  ${PROVISION_ARGS[@]+"${PROVISION_ARGS[@]}"}
 
 APP_PATH="$EXPORT_DIR/$APP_NAME.app"
 [ -d "$APP_PATH" ] || fail "Exported app not found at $APP_PATH"
