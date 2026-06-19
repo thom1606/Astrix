@@ -222,7 +222,7 @@ if [ "${SKIP_PUBLISH:-0}" = "1" ]; then
 fi
 
 # --- Publish ---------------------------------------------------------------
-log "Creating GitHub release $TAG…"
+log "Creating GitHub release ${TAG}…"
 gh release create "$TAG" \
   --repo "$REPO" \
   --title "$APP_NAME $MARKETING_VERSION" \
