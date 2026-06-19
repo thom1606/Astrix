@@ -1,0 +1,486 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "· Disabled" : {
+
+    },
+    "“%@” will be permanently removed. This can't be undone." : {
+
+    },
+    "%@" : {
+
+    },
+    "%@ (%lld running)" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$lld running)"
+          }
+        }
+      }
+    },
+    "10" : {
+
+    },
+    "Actions run top to bottom when you launch this workspace. A command set to “Keep running” is tracked — stop it from the workspace's menu bar submenu. Use the ⋯ menu on a section to disable, reorder, or remove it." : {
+
+    },
+    "Add Action" : {
+
+    },
+    "Add Folder…" : {
+
+    },
+    "Add Workspace" : {
+
+    },
+    "Astrix" : {
+
+    },
+    "Astrix couldn't find a workspace named %@." : {
+
+    },
+    "Astrix couldn't open %@." : {
+      "comment" : "Notification body shown when launching an app fails. %@ is the app name.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix kon %@ niet openen."
+          }
+        }
+      }
+    },
+    "Astrix Settings" : {
+
+    },
+    "Astrix suggests the right editor for each project." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix stelt voor elk project de juiste editor voor."
+          }
+        }
+      }
+    },
+    "Automatically suggest editors" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Check for Updates…" : {
+
+    },
+    "Choose which editor and terminal Astrix opens your folders in from the Finder menu." : {
+
+    },
+    "Choose…" : {
+
+    },
+    "Command" : {
+
+    },
+    "Copied" : {
+      "comment" : "Notification title shown after copying a path.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gekopieerd"
+          }
+        }
+      }
+    },
+    "Couldn't open" : {
+      "comment" : "Notification title shown when launching an app fails.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen mislukt"
+          }
+        }
+      }
+    },
+    "Default Applications" : {
+
+    },
+    "Default Editor" : {
+
+    },
+    "Default Terminal" : {
+
+    },
+    "Delete" : {
+
+    },
+    "Delete Workspace" : {
+
+    },
+    "Delete Workspace?" : {
+
+    },
+    "Developer" : {
+
+    },
+    "Done" : {
+
+    },
+    "e.g. 5000" : {
+
+    },
+    "e.g. bin/dev" : {
+
+    },
+    "e.g. Rails server" : {
+
+    },
+    "Editor" : {
+
+    },
+    "Enable Notifications" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen inschakelen"
+          }
+        }
+      }
+    },
+    "Enabled" : {
+
+    },
+    "Folder Recommendations" : {
+
+    },
+    "General" : {
+
+    },
+    "Get a heads-up when Astrix copies a path or can't open an app." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krijg een seintje wanneer Astrix een pad kopieert of een app niet kan openen."
+          }
+        }
+      }
+    },
+    "Get started" : {
+
+    },
+    "Get Started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aan de slag"
+          }
+        }
+      }
+    },
+    "https://example.com" : {
+
+    },
+    "Icon" : {
+
+    },
+    "Jump into any folder in your terminal of choice." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spring in elke map met je favoriete terminal."
+          }
+        }
+      }
+    },
+    "Launch ${workspace}" : {
+
+    },
+    "Launch Workspace" : {
+
+    },
+    "Launch your editor right where you need it." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start je editor precies waar je hem nodig hebt."
+          }
+        }
+      }
+    },
+    "Launching %@." : {
+
+    },
+    "Manage" : {
+
+    },
+    "Move Down" : {
+
+    },
+    "Move Up" : {
+
+    },
+    "Name" : {
+
+    },
+    "Name in menu" : {
+
+    },
+    "No folder recommendations yet." : {
+
+    },
+    "No workspaces yet." : {
+
+    },
+    "Notifications" : {
+      "comment" : "Settings section header.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen"
+          }
+        }
+      }
+    },
+    "Notifications are enabled." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen zijn ingeschakeld."
+          }
+        }
+      }
+    },
+    "Notifications are turned off in System Settings." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen zijn uitgeschakeld in Systeeminstellingen."
+          }
+        }
+      }
+    },
+    "Notifications Enabled" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingen ingeschakeld"
+          }
+        }
+      }
+    },
+    "Open folders in your favorite editor or terminal, right from Finder." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open mappen in je favoriete editor of terminal, direct vanuit Finder."
+          }
+        }
+      }
+    },
+    "Open in Editor" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in editor"
+          }
+        }
+      }
+    },
+    "Open in Terminal" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen in Terminal"
+          }
+        }
+      }
+    },
+    "Open Logs" : {
+
+    },
+    "Open System Settings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Systeeminstellingen openen"
+          }
+        }
+      }
+    },
+    "Port" : {
+
+    },
+    "Quit Astrix" : {
+
+    },
+    "Recommend specific editors for folders you choose. When automatic suggestions are on, Astrix also detects project markers, like .xcodeproj files or .vscode folders, and suggests the matching editor in the Finder menu." : {
+
+    },
+    "Recommendations" : {
+
+    },
+    "Request Notification Access" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meldingstoegang aanvragen"
+          }
+        }
+      }
+    },
+    "Reset Onboarding" : {
+
+    },
+    "Restart" : {
+
+    },
+    "Run all of a workspace's launch actions: open its editor, terminal, and browser tabs, and start its services." : {
+
+    },
+    "Seconds" : {
+
+    },
+    "Settings..." : {
+
+    },
+    "Show in Menu Bar" : {
+
+    },
+    "Smart Suggestions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Slimme suggesties"
+          }
+        }
+      }
+    },
+    "Software Updates" : {
+
+    },
+    "Stop %@" : {
+
+    },
+    "Stop All" : {
+
+    },
+    "Terminal" : {
+
+    },
+    "The path was copied to your clipboard." : {
+      "comment" : "Notification body after copying a single path.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het pad is naar je klembord gekopieerd."
+          }
+        }
+      }
+    },
+    "The paths were copied to your clipboard." : {
+      "comment" : "Notification body after copying multiple paths.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De paden zijn naar je klembord gekopieerd."
+          }
+        }
+      }
+    },
+    "The workspace path was copied to your clipboard." : {
+      "comment" : "Notification body after copying the workspace folder path.",
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Het pad van de werkruimte is naar je klembord gekopieerd."
+          }
+        }
+      }
+    },
+    "The workspace to launch." : {
+
+    },
+    "Timeout" : {
+
+    },
+    "URL" : {
+
+    },
+    "Version" : {
+
+    },
+    "Wait for exit" : {
+
+    },
+    "Welcome to Astrix" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welkom bij Astrix"
+          }
+        }
+      }
+    },
+    "Workspace" : {
+
+    },
+    "Workspaces" : {
+
+    },
+    "Workspaces appear in the menu bar. Click one to run all of its actions in order — open folders in your editor, URLs in your browser, terminals, and shell commands." : {
+
+    },
+    "Workspaces are currently in **beta** — you may run into rough edges as the feature is finalized." : {
+
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>Astrix</title>
+        <link>https://thom1606.github.io/Astrix/appcast.xml</link>
+        <description>Most recent changes for Astrix.</description>
+        <language>en</language>
+        <!-- BEGIN ITEMS -->
+    </channel>
+</rss>

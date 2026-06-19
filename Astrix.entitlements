@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- The menu bar app is intentionally NOT sandboxed (matches the reference and
+	     keeps Sparkle updates simple). It still joins the shared App Group so it can
+	     read/write settings shared with the sandboxed Settings app and Finder extension. -->
+	<key>com.apple.security.application-groups</key>
+	<array>
+		<string>$(TeamIdentifierPrefix)com.thom1606.Astrix</string>
+	</array>
+</dict>
+</plist>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- Sparkle update feed, hosted on GitHub Pages. -->
+	<key>SUFeedURL</key>
+	<string>https://thom1606.github.io/Astrix/appcast.xml</string>
+	<!-- Sparkle EdDSA public key. Generate the key pair once with Sparkle's
+	     `generate_keys` tool: it stores the private key in your login keychain and
+	     prints this public key. Replace the placeholder below with that value (and
+	     keep the private key safe — CI needs it as a secret to sign updates). -->
+	<key>SUPublicEDKey</key>
+	<string>8jnb+oJxxlzxCefWv7iPQni/4WDGvw/zTSPHm9+5HiE=</string>
+	<!-- Apple Developer team id, sourced from the TEAM_IDENTIFIER build setting
+	     (Configuration/Global.xcconfig); read at runtime to build the App Group id. -->
+	<key>TEAM_IDENTIFIER</key>
+	<string>$(TEAM_IDENTIFIER)</string>
+	<!-- The astrix:// URL scheme — external launch entry point. Lets Shortcuts, the
+	     `open` command, and other tools launch a workspace (astrix://launch?name=…
+	     or ?id=…). Handled by the GetURL Apple Event handler in AppDelegate. -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>com.thom1606.Astrix</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>astrix</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
