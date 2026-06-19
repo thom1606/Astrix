@@ -120,12 +120,14 @@ class FinderSync: FIFinderSync {
 
     // MARK: - Suggestion actions
 
-    /// Open the suggested folder in the editor carried on the clicked menu item
-    /// (`representedObject` is a `SupportedApps` raw value / bundle id).
+    /// Open the suggested folder in the editor carried on the clicked menu item's
+    /// `tag` (its index in `SupportedApps.allCases`). We can't use
+    /// `representedObject`: Finder drops it when serializing the menu into its own
+    /// process, so it's nil by the time the action fires.
     @objc func openSuggestion(_ sender: NSMenuItem) {
-        guard let raw = sender.representedObject as? String,
-              let app = SupportedApps(rawValue: raw),
+        let apps = SupportedApps.allCases
+        guard apps.indices.contains(sender.tag),
               let folder = Utilities.contextFolderURL else { return }
-        Utilities.open(folder, in: app)
+        Utilities.open(folder, in: apps[sender.tag])
     }
 }

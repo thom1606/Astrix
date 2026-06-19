@@ -37,7 +37,12 @@ class SuggestionsSection: AstrixSection {
 
         return editors.map { editor in
             let item = NSMenuItem(title: "Open in \(editor.displayName)", action: #selector(FinderSync.openSuggestion(_:)), keyEquivalent: "")
-            item.representedObject = editor.rawValue
+            // Carry the editor on `tag`, not `representedObject`. Finder serializes
+            // the menu into its own process to display it, and only primitive
+            // properties (title, tag) survive that boundary — `representedObject`
+            // comes back nil at click time. `tag` is the editor's index in
+            // `SupportedApps.allCases`.
+            item.tag = SupportedApps.allCases.firstIndex(of: editor) ?? 0
             return item
         }
     }
