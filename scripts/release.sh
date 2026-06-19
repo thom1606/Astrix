@@ -175,7 +175,9 @@ create-dmg \
 log "Signing update with Sparkle…"
 SIGN_UPDATE="$(find_sign_update)"
 if [ -n "${SPARKLE_PRIVATE_KEY:-}" ]; then
-  SIGN_OUTPUT="$("$SIGN_UPDATE" -s "$SPARKLE_PRIVATE_KEY" "$ZIP_PATH")"
+  # Feed the key to --ed-key-file - via stdin. Sparkle's -s flag is deprecated and
+  # no longer signs with current keys ("no longer supported for newly generated keys").
+  SIGN_OUTPUT="$(printf '%s\n' "$SPARKLE_PRIVATE_KEY" | "$SIGN_UPDATE" --ed-key-file - "$ZIP_PATH")"
 else
   # No key provided → read from the login keychain (local machines).
   SIGN_OUTPUT="$("$SIGN_UPDATE" "$ZIP_PATH")"
