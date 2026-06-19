@@ -334,7 +334,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n# Embed the Settings helper inside the main app. The Dock/Finder derive an app's\n# name from its bundle filename, so the embedded copy must be named Astrix.app\n# (the build product itself can't be, as that would collide with the main app).\n# We copy rather than use a Copy Files phase so the rename doesn't trip Xcode's\n# embedded-binary validation. The copy preserves the helper's own code signature\n# (including its sandbox/app-group entitlements); the outer app signs over it.\nSRC=\"${BUILT_PRODUCTS_DIR}/AstrixSettings.app\"\nHELPERS=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Helpers\"\nDST=\"${HELPERS}/Astrix.app\"\nmkdir -p \"${HELPERS}\"\nrm -rf \"${DST}\"\ncp -R \"${SRC}\" \"${DST}\"\n";
+			shellScript = "set -e\n# Embed the Settings helper inside the main app. The Dock/Finder derive an app's\n# name from its bundle filename, so the embedded copy must be named Astrix.app\n# (the build product itself can't be, as that would collide with the main app).\n# We copy rather than use a Copy Files phase so the rename doesn't trip Xcode's\n# embedded-binary validation. The copy preserves the helper's own code signature\n# (including its sandbox/app-group entitlements); the outer app signs over it.\nSRC=\"${BUILT_PRODUCTS_DIR}/AstrixSettings.app\"\nHELPERS=\"${BUILT_PRODUCTS_DIR}/${CONTENTS_FOLDER_PATH}/Helpers\"\nDST=\"${HELPERS}/Astrix.app\"\nmkdir -p \"${HELPERS}\"\nrm -rf \"${DST}\"\n# -H follows the command-line symlink: with SKIP_INSTALL the build product is a\n# symlink into UninstalledProducts, so a plain cp -R copies a dangling link.\ncp -RH \"${SRC}\" \"${DST}\"\n";
 		};
 		ABCDEF1234567890ABCDEF70 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -521,7 +521,7 @@
 				CODE_SIGN_ENTITLEMENTS = Astrix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -558,7 +558,7 @@
 				CODE_SIGN_ENTITLEMENTS = Astrix.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -594,7 +594,7 @@
 				CODE_SIGN_ENTITLEMENTS = AstrixSettings.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -629,7 +629,7 @@
 				CODE_SIGN_ENTITLEMENTS = AstrixSettings.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -663,7 +663,7 @@
 				CODE_SIGN_ENTITLEMENTS = FinderTools.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -694,7 +694,7 @@
 				CODE_SIGN_ENTITLEMENTS = FinderTools.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_TEAM = U6WA8YA735;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
