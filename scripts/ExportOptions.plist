@@ -2,12 +2,17 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<!-- Export a Developer ID-signed build for distribution outside the App Store. -->
+	<!-- Export a Developer ID-signed build for distribution outside the App Store.
+	     Manual signing with the imported Developer ID Application cert: a headless
+	     CI runner has no logged-in Apple account, and automatic export signing then
+	     fails to resolve distribution methods ("Unknown Distribution Error"). -->
 	<key>method</key>
 	<string>developer-id</string>
 	<key>teamID</key>
 	<string>U6WA8YA735</string>
 	<key>signingStyle</key>
-	<string>automatic</string>
+	<string>manual</string>
+	<key>signingCertificate</key>
+	<string>Developer ID Application</string>
 </dict>
 </plist>
