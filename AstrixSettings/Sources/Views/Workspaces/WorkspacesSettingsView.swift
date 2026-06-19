@@ -76,7 +76,7 @@ struct WorkspacesSettingsView: View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundStyle(.orange)
-            Text("Workspaces are currently in *beta*, you may run into rough edges as the feature is finalized. Report issues *here*.")
+            Text("Workspaces are currently in **beta**, you may run into rough edges as the feature is finalized. Report issues [**here**](https://github.com/thom1606/Astrix/issues).")
             Spacer(minLength: 0)
         }
         .padding(12)
