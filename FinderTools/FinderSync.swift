@@ -29,7 +29,18 @@ class FinderSync: FIFinderSync {
 
     // MARK: - Toolbar item
 
-    override var toolbarItemName: String { "Astrix (DEV)" }
+    /// Name shown in the Finder toolbar and the contextual submenu. Release builds
+    /// are just "Astrix"; Debug/Dev builds keep the "(DEV)" suffix so the two
+    /// installs stay distinguishable while developing.
+    private var displayName: String {
+        #if DEBUG
+        "Astrix (DEV)"
+        #else
+        "Astrix"
+        #endif
+    }
+
+    override var toolbarItemName: String { displayName }
 
     override var toolbarItemToolTip: String { "Easily navigate right from your Finder window" }
 
@@ -56,7 +67,7 @@ class FinderSync: FIFinderSync {
             addSection(WorkspaceSection(), to: astrixMenu)
             addSection(SuggestionsSection(), to: astrixMenu)
 
-            let mainMenuItem = NSMenuItem(title: "Astrix (DEV)", action: nil, keyEquivalent: "")
+            let mainMenuItem = NSMenuItem(title: displayName, action: nil, keyEquivalent: "")
             mainMenuItem.submenu = astrixMenu
             menu.addItem(mainMenuItem)
         case .toolbarItemMenu:
