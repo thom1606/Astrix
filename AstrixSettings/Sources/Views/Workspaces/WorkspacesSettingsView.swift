@@ -28,7 +28,7 @@ struct WorkspacesSettingsView: View {
 
                 SettingsSection(
                     "Workspaces",
-                    footer: "Workspaces appear in the menu bar. Click one to run all of its actions in order — open folders in your editor, URLs in your browser, terminals, and shell commands."
+                    footer: "Workspaces appear in your Menu Bar, click on one to run all the defined actions in order. Open folders in your editor, URL's in your browser, terminals and run shell commands."
                 ) {
                     ForEach(store.workspaces) { workspace in
                         WorkspaceRow(
@@ -76,7 +76,7 @@ struct WorkspacesSettingsView: View {
         HStack(alignment: .firstTextBaseline, spacing: 10) {
             Image(systemName: "exclamationmark.triangle.fill")
                 .foregroundStyle(.orange)
-            Text("Workspaces are currently in **beta** — you may run into rough edges as the feature is finalized.")
+            Text("Workspaces are currently in *beta*, you may run into rough edges as the feature is finalized. Report issues *here*.")
             Spacer(minLength: 0)
         }
         .padding(12)

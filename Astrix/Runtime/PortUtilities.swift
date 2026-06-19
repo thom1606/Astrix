@@ -31,10 +31,10 @@ enum PortUtilities {
 
         var candidate = resolved
         while let address = candidate {
-            let fd = socket(address.pointee.ai_family, address.pointee.ai_socktype, address.pointee.ai_protocol)
-            if fd >= 0 {
-                let connected = connect(fd, address.pointee.ai_addr, address.pointee.ai_addrlen) == 0
-                close(fd)
+            let socketFD = socket(address.pointee.ai_family, address.pointee.ai_socktype, address.pointee.ai_protocol)
+            if socketFD >= 0 {
+                let connected = connect(socketFD, address.pointee.ai_addr, address.pointee.ai_addrlen) == 0
+                close(socketFD)
                 if connected { return true }
             }
             candidate = address.pointee.ai_next

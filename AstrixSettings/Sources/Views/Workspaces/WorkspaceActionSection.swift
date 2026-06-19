@@ -58,8 +58,6 @@ struct WorkspaceActionSection: View {
 
     private var overflowMenu: some View {
         Menu {
-            Toggle("Enabled", isOn: $action.enabled)
-            Divider()
             Button(action: onMoveUp) { Label("Move Up", systemImage: "arrow.up") }
                 .disabled(!canMoveUp)
             Button(action: onMoveDown) { Label("Move Down", systemImage: "arrow.down") }

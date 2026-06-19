@@ -79,7 +79,7 @@ struct GeneralSettingsView: View {
     private var notificationsSection: some View {
         SettingsSection(
             "Notifications",
-            footer: "Get a heads-up when Astrix copies a path or can't open an app."
+            footer: "Get feedback about important changes in processes and actions."
         ) {
             switch notificationStatus {
             case .notDetermined:

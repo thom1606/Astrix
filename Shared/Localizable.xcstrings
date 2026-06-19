@@ -5,10 +5,36 @@
 
     },
     "· Disabled" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "· Desactivado"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "· Uitgeschakeld"
+          }
+        }
+      }
     },
     "“%@” will be permanently removed. This can't be undone." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "«%@» se eliminará permanentemente. Esto no se puede deshacer."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "‘%@’ wordt definitief verwijderd. Dit kan niet ongedaan worden gemaakt."
+          }
+        }
+      }
     },
     "%@" : {
 
@@ -20,34 +46,117 @@
             "state" : "new",
             "value" : "%1$@ (%2$lld running)"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$lld en ejecución)"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%1$@ (%2$lld actief)"
+          }
         }
       }
     },
     "10" : {
 
     },
-    "Actions run top to bottom when you launch this workspace. A command set to “Keep running” is tracked — stop it from the workspace's menu bar submenu. Use the ⋯ menu on a section to disable, reorder, or remove it." : {
-
+    "Actions run top to bottom when you launch this workspace. Commands stay tracked, you may stop them from the workspace's menu bar submenu at any time." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las acciones se ejecutan de arriba abajo cuando inicias este espacio de trabajo. Los comandos se mantienen en seguimiento y puedes detenerlos en cualquier momento desde el submenú de la barra de menús del espacio de trabajo."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Acties worden van boven naar beneden uitgevoerd wanneer je deze werkruimte start. Opdrachten blijven gevolgd; je kunt ze op elk moment stoppen via het submenu in de menubalk van de werkruimte."
+          }
+        }
+      }
     },
     "Add Action" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir acción"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actie toevoegen"
+          }
+        }
+      }
     },
     "Add Folder…" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir carpeta…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map toevoegen…"
+          }
+        }
+      }
     },
     "Add Workspace" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir espacio de trabajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimte toevoegen"
+          }
+        }
+      }
     },
     "Astrix" : {
 
     },
     "Astrix couldn't find a workspace named %@." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix no encontró ningún espacio de trabajo llamado %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix kon geen werkruimte met de naam %@ vinden."
+          }
+        }
+      }
     },
     "Astrix couldn't open %@." : {
       "comment" : "Notification body shown when launching an app fails. %@ is the app name.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix no pudo abrir %@."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -57,11 +166,30 @@
       }
     },
     "Astrix Settings" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes de Astrix"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix-instellingen"
+          }
+        }
+      }
     },
     "Astrix suggests the right editor for each project." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix sugiere el editor adecuado para cada proyecto."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -71,27 +199,111 @@
       }
     },
     "Automatically suggest editors" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sugerir editores automáticamente"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatisch editors voorstellen"
+          }
+        }
+      }
     },
     "Cancel" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Annuleren"
+          }
+        }
+      }
     },
     "Check for Updates…" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar actualizaciones…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Controleren op updates…"
+          }
+        }
+      }
     },
     "Choose which editor and terminal Astrix opens your folders in from the Finder menu." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elige en qué editor y terminal abre Astrix tus carpetas desde el menú de Finder."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kies in welke editor en terminal Astrix je mappen opent vanuit het Finder-menu."
+          }
+        }
+      }
     },
     "Choose…" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elegir…"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kiezen…"
+          }
+        }
+      }
     },
     "Command" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comando"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opdracht"
+          }
+        }
+      }
     },
     "Copied" : {
       "comment" : "Notification title shown after copying a path.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Copiado"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -104,6 +316,12 @@
       "comment" : "Notification title shown when launching an app fails.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se pudo abrir"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -113,44 +331,206 @@
       }
     },
     "Default Applications" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aplicaciones predeterminadas"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaardapps"
+          }
+        }
+      }
     },
     "Default Editor" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editor predeterminado"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaardeditor"
+          }
+        }
+      }
     },
     "Default Terminal" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal predeterminada"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Standaardterminal"
+          }
+        }
+      }
     },
     "Delete" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verwijderen"
+          }
+        }
+      }
     },
     "Delete Workspace" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eliminar espacio de trabajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimte verwijderen"
+          }
+        }
+      }
     },
     "Delete Workspace?" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Eliminar espacio de trabajo?"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimte verwijderen?"
+          }
+        }
+      }
     },
     "Developer" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarrollador"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ontwikkelaar"
+          }
+        }
+      }
     },
     "Done" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gereed"
+          }
+        }
+      }
     },
     "e.g. 5000" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "p. ej. 5000"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bijv. 5000"
+          }
+        }
+      }
     },
     "e.g. bin/dev" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "p. ej. bin/dev"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bijv. bin/dev"
+          }
+        }
+      }
     },
     "e.g. Rails server" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "p. ej. servidor Rails"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bijv. Rails-server"
+          }
+        }
+      }
     },
     "Editor" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editor"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editor"
+          }
+        }
+      }
     },
     "Enable Notifications" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activar notificaciones"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -159,32 +539,80 @@
         }
       }
     },
-    "Enabled" : {
-
-    },
     "Folder Recommendations" : {
-
-    },
-    "General" : {
-
-    },
-    "Get a heads-up when Astrix copies a path or can't open an app." : {
-      "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recomendaciones de carpetas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Krijg een seintje wanneer Astrix een pad kopieert of een app niet kan openen."
+            "value" : "Aanbevelingen voor mappen"
+          }
+        }
+      }
+    },
+    "General" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Algemeen"
+          }
+        }
+      }
+    },
+    "Get feedback about important changes in processes and actions." : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recibe información sobre cambios importantes en procesos y acciones."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krijg feedback over belangrijke wijzigingen in processen en acties."
           }
         }
       }
     },
     "Get started" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aan de slag"
+          }
+        }
+      }
     },
     "Get Started" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comenzar"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -197,11 +625,30 @@
 
     },
     "Icon" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pictogram"
+          }
+        }
+      }
     },
     "Jump into any folder in your terminal of choice." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Entra en cualquier carpeta con tu terminal preferida."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -211,14 +658,46 @@
       }
     },
     "Launch ${workspace}" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar ${workspace}"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start ${workspace}"
+          }
+        }
+      }
     },
     "Launch Workspace" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciar espacio de trabajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimte starten"
+          }
+        }
+      }
     },
     "Launch your editor right where you need it." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicia tu editor justo donde lo necesitas."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -228,33 +707,143 @@
       }
     },
     "Launching %@." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iniciando %@."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ wordt gestart."
+          }
+        }
+      }
     },
     "Manage" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gestionar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beheren"
+          }
+        }
+      }
     },
     "Move Down" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mover abajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omlaag verplaatsen"
+          }
+        }
+      }
     },
     "Move Up" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mover arriba"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Omhoog verplaatsen"
+          }
+        }
+      }
     },
     "Name" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam"
+          }
+        }
+      }
     },
     "Name in menu" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre en el menú"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Naam in menu"
+          }
+        }
+      }
     },
     "No folder recommendations yet." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay recomendaciones de carpetas."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nog geen aanbevolen mappen."
+          }
+        }
+      }
     },
     "No workspaces yet." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aún no hay espacios de trabajo."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nog geen werkruimtes."
+          }
+        }
+      }
     },
     "Notifications" : {
       "comment" : "Settings section header.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -266,6 +855,12 @@
     "Notifications are enabled." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están activadas."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -277,6 +872,12 @@
     "Notifications are turned off in System Settings." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las notificaciones están desactivadas en Ajustes del Sistema."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -288,6 +889,12 @@
     "Notifications Enabled" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notificaciones activadas"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -299,6 +906,12 @@
     "Open folders in your favorite editor or terminal, right from Finder." : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abre carpetas en tu editor o terminal favorito, directamente desde Finder."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -310,6 +923,12 @@
     "Open in Editor" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en editor"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -321,6 +940,12 @@
     "Open in Terminal" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir en Terminal"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -330,11 +955,30 @@
       }
     },
     "Open Logs" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir registros"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logboeken openen"
+          }
+        }
+      }
     },
     "Open System Settings" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir Ajustes del Sistema"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -344,20 +988,78 @@
       }
     },
     "Port" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Puerto"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poort"
+          }
+        }
+      }
     },
     "Quit Astrix" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Salir de Astrix"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix afsluiten"
+          }
+        }
+      }
     },
     "Recommend specific editors for folders you choose. When automatic suggestions are on, Astrix also detects project markers, like .xcodeproj files or .vscode folders, and suggests the matching editor in the Finder menu." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recomienda editores específicos para las carpetas que elijas. Cuando las sugerencias automáticas están activadas, Astrix también detecta marcadores de proyecto, como archivos .xcodeproj o carpetas .vscode, y sugiere el editor correspondiente en el menú de Finder."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Beveel specifieke editors aan voor mappen die je kiest. Wanneer automatische suggesties aanstaan, herkent Astrix ook projectmarkeringen, zoals .xcodeproj-bestanden of .vscode-mappen, en stelt het de bijbehorende editor voor in het Finder-menu."
+          }
+        }
+      }
     },
     "Recommendations" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recomendaciones"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aanbevelingen"
+          }
+        }
+      }
     },
     "Request Notification Access" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solicitar acceso a notificaciones"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -367,26 +1069,110 @@
       }
     },
     "Reset Onboarding" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer introducción"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Onboarding opnieuw instellen"
+          }
+        }
+      }
     },
     "Restart" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reiniciar"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opnieuw starten"
+          }
+        }
+      }
     },
     "Run all of a workspace's launch actions: open its editor, terminal, and browser tabs, and start its services." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ejecuta todas las acciones de inicio de un espacio de trabajo: abre su editor, terminal y pestañas del navegador, e inicia sus servicios."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voer alle startacties van een werkruimte uit: open de editor, terminal en browsertabbladen, en start de bijbehorende services."
+          }
+        }
+      }
     },
     "Seconds" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Segundos"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seconden"
+          }
+        }
+      }
     },
     "Settings..." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes..."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Instellingen..."
+          }
+        }
+      }
     },
     "Show in Menu Bar" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar en la barra de menús"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tonen in menubalk"
+          }
+        }
+      }
     },
     "Smart Suggestions" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sugerencias inteligentes"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -396,21 +1182,79 @@
       }
     },
     "Software Updates" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Actualizaciones de software"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Software-updates"
+          }
+        }
+      }
     },
     "Stop %@" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener %@"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ stoppen"
+          }
+        }
+      }
     },
     "Stop All" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detener todo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alles stoppen"
+          }
+        }
+      }
     },
     "Terminal" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal"
+          }
+        }
+      }
     },
     "The path was copied to your clipboard." : {
       "comment" : "Notification body after copying a single path.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ruta se copió en el portapapeles."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -423,6 +1267,12 @@
       "comment" : "Notification body after copying multiple paths.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las rutas se copiaron en el portapapeles."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -435,6 +1285,12 @@
       "comment" : "Notification body after copying the workspace folder path.",
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La ruta del espacio de trabajo se copió en el portapapeles."
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -444,23 +1300,94 @@
       }
     },
     "The workspace to launch." : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El espacio de trabajo que se iniciará."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "De te starten werkruimte."
+          }
+        }
+      }
     },
     "Timeout" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo de espera"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time-out"
+          }
+        }
+      }
     },
     "URL" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URL"
+          }
+        }
+      }
     },
     "Version" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versión"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Versie"
+          }
+        }
+      }
     },
     "Wait for exit" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Esperar a que termine"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wachten op afsluiten"
+          }
+        }
+      }
     },
     "Welcome to Astrix" : {
       "extractionState" : "manual",
       "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bienvenido a Astrix"
+          }
+        },
         "nl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -470,16 +1397,68 @@
       }
     },
     "Workspace" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espacio de trabajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimte"
+          }
+        }
+      }
     },
     "Workspaces" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Espacios de trabajo"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimtes"
+          }
+        }
+      }
     },
-    "Workspaces appear in the menu bar. Click one to run all of its actions in order — open folders in your editor, URLs in your browser, terminals, and shell commands." : {
-
+    "Workspaces appear in your Menu Bar, click on one to run all the defined actions in order. Open folders in your editor, URL's in your browser, terminals and run shell commands." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los espacios de trabajo aparecen en tu barra de menús. Haz clic en uno para ejecutar todas las acciones definidas en orden. Abre carpetas en tu editor, URL en tu navegador, terminales y ejecuta comandos de shell."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimtes verschijnen in je menubalk. Klik op één om alle gedefinieerde acties op volgorde uit te voeren. Open mappen in je editor, URL's in je browser, terminals en voer shell-opdrachten uit."
+          }
+        }
+      }
     },
-    "Workspaces are currently in **beta** — you may run into rough edges as the feature is finalized." : {
-
+    "Workspaces are currently in *beta*, you may run into rough edges as the feature is finalized. Report issues *here*." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Los espacios de trabajo están actualmente en *beta*, es posible que encuentres detalles sin pulir mientras se finaliza la función. Informa de problemas *aquí*."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Werkruimtes zijn momenteel in *beta*, je kunt tegen ruwe randjes aanlopen terwijl de functie wordt afgerond. Meld problemen *hier*."
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

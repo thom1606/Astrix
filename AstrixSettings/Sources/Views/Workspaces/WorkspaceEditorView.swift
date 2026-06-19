@@ -87,7 +87,7 @@ struct WorkspaceEditorView: View {
 
     private var addActionSection: some View {
         SettingsSection(
-            footer: "Actions run top to bottom when you launch this workspace. A command set to “Keep running” is tracked — stop it from the workspace's menu bar submenu. Use the ⋯ menu on a section to disable, reorder, or remove it."
+            footer: "Actions run top to bottom when you launch this workspace. Commands stay tracked, you may stop them from the workspace's menu bar submenu at any time."
         ) {
             Menu("Add Action") {
                 addButton(.openInDefaultEditor)
