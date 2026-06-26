@@ -6,5 +6,13 @@
         <description>Most recent changes for Astrix.</description>
         <language>en</language>
         <!-- BEGIN ITEMS -->
+        <item>
+            <title>2.0.2</title>
+            <pubDate>Fri, 26 Jun 2026 07:18:36 +0000</pubDate>
+            <sparkle:version>14</sparkle:version>
+            <sparkle:shortVersionString>2.0.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/thom1606/Astrix/releases/download/v2.0.2/Astrix-2.0.2.zip" length="6163711" type="application/octet-stream" sparkle:edSignature="SdLHRmIY+tKG9DwWiatX9SLim9LyXPUNwHHsCJ0mLSd/3NwnDALaiIpxEmiemDXn5iShZpVZPFwEgEjWeCDmCg=="/>
+        </item>
     </channel>
 </rss>
