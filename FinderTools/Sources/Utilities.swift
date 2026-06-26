@@ -59,6 +59,24 @@ enum Utilities {
         return listing.split(whereSeparator: \.isNewline).map(String.init)
     }
 
+    // MARK: - Host app
+
+    /// Make sure the main Astrix agent is running. The Finder menu can open editors
+    /// and terminals on its own (via the helper script), but the agent is what posts
+    /// notifications, drains the relay queue, and keeps that helper script fresh — and
+    /// if the user hasn't enabled "Open at Login" it may be down. This is the fallback:
+    /// when it isn't running we relaunch it in the background.
+    ///
+    /// The extension is sandboxed, so we go through the same helper script the open
+    /// actions use (`open -gj` launches it hidden, without stealing focus from Finder).
+    /// No-op when the agent is already running, or when the helper script isn't
+    /// installed yet — the agent installs that on its first run, so it must be launched
+    /// once manually before this can take over.
+    static func ensureHostRunning() {
+        guard NSRunningApplication.runningApplications(withBundleIdentifier: Constants.BundleID.mainApp).isEmpty else { return }
+        runCommand("open -gj -b \(shellQuote(Constants.BundleID.mainApp))")
+    }
+
     // MARK: - Opening
 
     /// Open the current workspace folder in the given app.

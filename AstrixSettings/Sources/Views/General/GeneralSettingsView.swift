@@ -24,13 +24,20 @@ struct GeneralSettingsView: View {
 
     @State private var notificationStatus: UNAuthorizationStatus = .notDetermined
 
+    // Open-at-login is applied by the main app (SMAppService registers the calling
+    // app, so the sandboxed Settings app can't do it itself). We hold the value in
+    // local state, flip the shared preference + signal the main app on change, and
+    // refresh when it publishes the real status back — mirroring the notification
+    // pattern above rather than binding @AppStorage straight to the switch.
+    @State private var openAtLogin = SharedSettings.openAtLogin
+
     var body: some View {
         HStack(spacing: 0) {
             banner
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 22) {
-                    menuBarSection
+                    behaviorSection
                     notificationsSection
                     defaultApplicationsSection
                     updatesSection
@@ -45,10 +52,21 @@ struct GeneralSettingsView: View {
         .background(Color(nsColor: .windowBackgroundColor))
         .onAppear {
             DarwinNotify.startBridging(Constants.DarwinSignal.notificationStatusChanged)
+            DarwinNotify.startBridging(Constants.DarwinSignal.openAtLoginChanged)
             refreshNotificationStatus()
+            openAtLogin = SharedSettings.openAtLogin
         }
         .onReceive(NotificationCenter.default.publisher(for: .init(Constants.DarwinSignal.notificationStatusChanged))) { _ in
             refreshNotificationStatus()
+        }
+        .onReceive(NotificationCenter.default.publisher(for: .init(Constants.DarwinSignal.openAtLoginChanged))) { _ in
+            // The main app published the real status (it may differ from what we asked
+            // for); reflect it without re-triggering onChange when it already matches.
+            openAtLogin = SharedSettings.openAtLogin
+        }
+        .onChange(of: openAtLogin) { _, newValue in
+            UserDefaults.astrixShared.set(newValue, forKey: Constants.DefaultsKey.openAtLogin)
+            DarwinNotify.post(Constants.DarwinSignal.setOpenAtLogin)
         }
     }
 
@@ -70,9 +88,12 @@ struct GeneralSettingsView: View {
 
     // MARK: - Sections
 
-    private var menuBarSection: some View {
-        SettingsSection {
+    private var behaviorSection: some View {
+        SettingsSection(
+            footer: "Astrix runs in the background so its Finder menu and shortcuts stay available."
+        ) {
             SettingsToggleRow("Show in Menu Bar", isOn: $showInMenuBar)
+            SettingsToggleRow("Open at Login", isOn: $openAtLogin)
         }
     }
 

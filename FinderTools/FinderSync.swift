@@ -56,6 +56,11 @@ class FinderSync: FIFinderSync {
     override func menu(for menuKind: FIMenuKind) -> NSMenu? {
         if menuKind == .contextualMenuForSidebar { return nil }
 
+        // Opening the Astrix menu is a good moment to make sure the agent is up, so
+        // notifications work and the relay queue drains for whatever action follows —
+        // a fallback for when "Open at Login" is off and the agent was quit.
+        Utilities.ensureHostRunning()
+
         let menu = NSMenu(title: "")
 
         switch menuKind {

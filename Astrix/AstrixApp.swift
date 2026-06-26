@@ -81,6 +81,15 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         NotificationCenter.default.addObserver(forName: .init(Constants.DarwinSignal.checkForUpdates), object: nil, queue: .main) { [weak self] _ in
             self?.updaterController.updater.checkForUpdates()
         }
+        // Open-at-login lives here: SMAppService registers *this* app, so the sandboxed
+        // Settings app can only flip the shared preference and signal us to apply it.
+        // Mirror the real status on launch so the toggle tracks changes made in System
+        // Settings while we weren't running.
+        LoginItemManager.syncStatusToPreference()
+        DarwinNotify.startBridging(Constants.DarwinSignal.setOpenAtLogin)
+        NotificationCenter.default.addObserver(forName: .init(Constants.DarwinSignal.setOpenAtLogin), object: nil, queue: .main) { _ in
+            LoginItemManager.applyStoredPreference()
+        }
         #if DEBUG
         // Dev tool: the Settings "Reset Onboarding" button clears the flag and
         // re-shows onboarding so it can be iterated on.
@@ -171,6 +180,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         // this keeps it horizontally centered and the decorations flush at the bottom.
         window.contentView = FullBleedHostingView(rootView: AnyView(OnboardingView { [weak window] in
             UserDefaults.astrixShared.set(true, forKey: Constants.DefaultsKey.hasCompletedOnboarding)
+            // New installs opt into launch-at-login: Astrix needs to be running for the
+            // Finder menu and shortcuts to work, so finishing onboarding enables it.
+            LoginItemManager.setEnabled(true)
             window?.close()
         }))
         onboardingWindow = window

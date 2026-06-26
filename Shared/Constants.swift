@@ -48,6 +48,10 @@ enum Constants {
         static let workspaces = "workspaces"
         static let autoSuggestEditors = "autoSuggestEditors"
         static let hasCompletedOnboarding = "hasCompletedOnboarding"
+        /// Whether Astrix launches automatically at login. The Settings app writes
+        /// the user's intent here; the main app owns the actual `SMAppService`
+        /// registration and keeps this key in sync with the real status.
+        static let openAtLogin = "openAtLogin"
         /// Notification authorization status (UNAuthorizationStatus rawValue),
         /// written by the main app so other targets can display it.
         static let notificationAuthStatus = "notificationAuthStatus"
@@ -76,6 +80,12 @@ enum Constants {
         static let notificationStatusChanged = "com.thom1606.Astrix.notificationStatusChanged"
         /// Settings → main app: check for updates (Sparkle lives in the main app).
         static let checkForUpdates = "com.thom1606.Astrix.checkForUpdates"
+        /// Settings → main app: apply the stored open-at-login preference
+        /// (`SMAppService` registers the calling app, so only the main app can).
+        static let setOpenAtLogin = "com.thom1606.Astrix.setOpenAtLogin"
+        /// Main app → others: the persisted open-at-login status changed (e.g. after
+        /// applying a request, or after reconciling with System Settings on launch).
+        static let openAtLoginChanged = "com.thom1606.Astrix.openAtLoginChanged"
         /// Settings → main app (DEBUG): reset and re-show onboarding.
         static let resetOnboarding = "com.thom1606.Astrix.resetOnboarding"
     }
@@ -84,8 +94,10 @@ enum Constants {
     /// with the released app installed in /Applications.
     enum BundleID {
         #if DEBUG
+        static let mainApp = "com.thom1606.Astrix.Dev"
         static let finderExtension = "com.thom1606.Astrix.Dev.FinderTools"
         #else
+        static let mainApp = "com.thom1606.Astrix"
         static let finderExtension = "com.thom1606.Astrix.FinderTools"
         #endif
     }

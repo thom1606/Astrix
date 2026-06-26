@@ -165,6 +165,22 @@
         }
       }
     },
+    "Astrix runs in the background so its Finder menu and shortcuts stay available." : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix se ejecuta en segundo plano para que su menú de Finder y sus atajos sigan disponibles."
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Astrix draait op de achtergrond zodat het Finder-menu en snelkoppelingen beschikbaar blijven."
+          }
+        }
+      }
+    },
     "Astrix Settings" : {
       "localizations" : {
         "es" : {
@@ -899,6 +915,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Meldingen ingeschakeld"
+          }
+        }
+      }
+    },
+    "Open at Login" : {
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir al iniciar sesión"
+          }
+        },
+        "nl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Openen bij inloggen"
           }
         }
       }

@@ -1,2 +1,10 @@
+# Build configuration holding the (private) TEAM_IDENTIFIER — recreated locally.
 *.xcconfig
+
+# macOS Finder metadata
 .DS_Store
+
+# Xcode per-user state (window layout, breakpoints, scheme ordering, etc).
+# Shared schemes live under xcshareddata/ and stay tracked.
+xcuserdata/
+*.xcuserstate

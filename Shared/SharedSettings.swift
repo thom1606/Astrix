@@ -50,6 +50,13 @@ enum SharedSettings {
         defaults.object(forKey: Constants.DefaultsKey.showInMenuBar) as? Bool ?? true
     }
 
+    /// Whether Astrix launches automatically at login. Defaults to off. The main app
+    /// owns the actual `SMAppService` registration and keeps this in sync with the
+    /// real status; other targets read it (e.g. the Settings toggle's initial value).
+    static var openAtLogin: Bool {
+        defaults.bool(forKey: Constants.DefaultsKey.openAtLogin)
+    }
+
     /// The user's per-folder editor recommendations.
     static var folderRecommendations: [FolderRecommendation] {
         guard let data = defaults.data(forKey: Constants.DefaultsKey.folderRecommendations),
