@@ -88,6 +88,21 @@ enum SupportedApps: String, CaseIterable, Identifiable {
         return NSWorkspace.shared.urlForApplication(withBundleIdentifier: rawValue) != nil
     }
 
+    /// Absolute path to a command-line tool bundled inside the app that should be
+    /// used to open a path instead of Launch Services (`open -b`), or `nil` when the
+    /// app has no such CLI or isn't installed. cmux's CLI opens a folder as a
+    /// workspace in the running cmux window (launching cmux if needed) — the right
+    /// behaviour for a terminal, which `open -b` doesn't give us.
+    var bundledCLIPath: String? {
+        switch self {
+        case .cmux:
+            guard let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: rawValue) else { return nil }
+            return appURL.appendingPathComponent("Contents/Resources/bin/cmux").path
+        default:
+            return nil
+        }
+    }
+
     // MARK: - Catalogs
 
     /// All supported editors, sorted by display name for presentation.
