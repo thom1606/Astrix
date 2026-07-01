@@ -96,9 +96,9 @@ enum Utilities {
     /// Launch `app` with `url` (folder or file) as the document to open.
     ///
     /// The extension is sandboxed and can't launch apps directly, so this runs a
-    /// shell command through the helper AppleScript (see `Scripting`). Editors with
-    /// a first-class CLI (Xcode's `xed`, Zed's `zed`) use it for better behaviour;
-    /// if the CLI isn't found we fall back to `open -b <bundle-id>`.
+    /// shell command through the helper AppleScript (see `Scripting`). Apps with a
+    /// first-class CLI (Xcode's `xed`, Zed's `zed`, cmux) use it for better
+    /// behaviour; if the CLI isn't found we fall back to `open -b <bundle-id>`.
     @discardableResult
     static func open(_ url: URL, in app: SupportedApps) -> Bool {
         guard app != .none else { return false }
@@ -121,9 +121,14 @@ enum Utilities {
         return result.success
     }
 
-    /// The preferred CLI command for editors that ship one, or `nil` to use
-    /// `open -b`. `path` is already shell-quoted.
+    /// The preferred CLI command for apps that ship one, or `nil` to use `open -b`.
+    /// `path` is already shell-quoted.
     private static func cliOpenCommand(for app: SupportedApps, path: String) -> String? {
+        // Apps whose CLI is bundled inside the app (cmux) — invoke it by its
+        // absolute path so it works regardless of what's on `do shell script`'s PATH.
+        if let cli = app.bundledCLIPath {
+            return "\(shellQuote(cli)) \(path)"
+        }
         switch app {
         case .xcode:
             // `xed` ships with Xcode and lives in /usr/bin (already on PATH); it

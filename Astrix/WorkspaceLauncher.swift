@@ -33,7 +33,8 @@ enum WorkspaceLauncher {
 
     // MARK: - Opening
 
-    /// Open a filesystem path in the given app via Launch Services (the native
+    /// Open a filesystem path in the given app. Apps that ship a CLI (cmux) are
+    /// launched through it; everything else goes via Launch Services (the native
     /// equivalent of `open -b <bundle-id> <path>`).
     private static func open(path: String, in app: SupportedApps) {
         let trimmed = path.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -43,10 +44,36 @@ enum WorkspaceLauncher {
             return
         }
 
-        let fileURL = URL(fileURLWithPath: (trimmed as NSString).expandingTildeInPath)
+        let expandedPath = (trimmed as NSString).expandingTildeInPath
+
+        // Prefer the app's bundled CLI (e.g. `cmux <path>`, which opens the folder
+        // as a workspace in the active cmux window). Fall through to Launch Services
+        // if the CLI is missing or won't spawn.
+        if let cli = app.bundledCLIPath, launchCLI(cli, with: expandedPath) {
+            return
+        }
+
+        let fileURL = URL(fileURLWithPath: expandedPath)
         let configuration = NSWorkspace.OpenConfiguration()
         NSWorkspace.shared.open([fileURL], withApplicationAt: appURL, configuration: configuration) { _, error in
             if error != nil { NSSound.beep() }
+        }
+    }
+
+    /// Run a bundled CLI (`cliPath <path>`) to open `path`. Returns `false` when the
+    /// binary is missing or can't be spawned so the caller can fall back to Launch
+    /// Services. Doesn't wait for exit — these tools launch/foreground their app.
+    private static func launchCLI(_ cliPath: String, with path: String) -> Bool {
+        guard FileManager.default.isExecutableFile(atPath: cliPath) else { return false }
+
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: cliPath)
+        process.arguments = [path]
+        do {
+            try process.run()
+            return true
+        } catch {
+            return false
         }
     }
 
