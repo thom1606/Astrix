@@ -19,7 +19,7 @@ struct WorkspacesMenu: View {
 
     var body: some View {
         ForEach(workspaces) { workspace in
-            if processes.isRunning(workspace.id) {
+            if processes.hasServices(workspace.id) {
                 runningMenu(workspace)
             } else {
                 Button {
@@ -31,11 +31,12 @@ struct WorkspacesMenu: View {
         }
     }
 
-    /// A running workspace: a submenu with per-process Stop, Stop All, Restart, and
-    /// Open Logs.
+    /// A launched workspace: a submenu with per-process Stop, a Start entry for each
+    /// service the user stopped, plus Stop All, Restart, and Open Logs.
     @ViewBuilder
     private func runningMenu(_ workspace: Workspace) -> some View {
         let services = processes.services(for: workspace.id)
+        let stoppedServices = processes.stoppedServices(for: workspace.id)
         Menu {
             ForEach(services) { service in
                 Button {
@@ -44,15 +45,25 @@ struct WorkspacesMenu: View {
                     Label("Stop \(menuLabel(service.label))", systemImage: "stop.circle")
                 }
             }
+            ForEach(stoppedServices) { service in
+                Button {
+                    WorkspaceRunner.launchAction(service.id, in: workspace)
+                } label: {
+                    Label("Start \(menuLabel(service.label))", systemImage: "play.circle")
+                }
+            }
 
             Divider()
 
             Button {
+                let hadRunning = !services.isEmpty
                 processes.stopAll(in: workspace.id)
-                NotificationManager.notify(
-                    title: "\(workspace.displayName) stopped",
-                    body: "All processes have been ended."
-                )
+                if hadRunning {
+                    NotificationManager.notify(
+                        title: "\(workspace.displayName) stopped",
+                        body: "All processes have been ended."
+                    )
+                }
             } label: {
                 Label("Stop All", systemImage: "stop.fill")
             }
@@ -70,11 +81,17 @@ struct WorkspacesMenu: View {
                 Label("Open Logs", systemImage: "doc.plaintext")
             }
         } label: {
-            Label("\(workspace.displayName) (\(services.count) running)", systemImage: workspace.icon)
+            Label(submenuTitle(workspace, runningCount: services.count), systemImage: workspace.icon)
         }
     }
 
     // MARK: - Helpers
+
+    /// Submenu title: append the live count while something is running, otherwise just
+    /// the workspace name (its stopped services are listed inside as Start entries).
+    private func submenuTitle(_ workspace: Workspace, runningCount: Int) -> String {
+        runningCount > 0 ? "\(workspace.displayName) (\(runningCount) running)" : workspace.displayName
+    }
 
     /// Collapse a possibly multi-line command into a short single-line menu title.
     private func menuLabel(_ label: String) -> String {
