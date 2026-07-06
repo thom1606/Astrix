@@ -40,6 +40,7 @@
 
     },
     "%@ (%lld running)" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1228,6 +1229,9 @@
           }
         }
       }
+    },
+    "Start %@" : {
+
     },
     "Stop %@" : {
       "localizations" : {

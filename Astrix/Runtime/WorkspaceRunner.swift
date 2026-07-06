@@ -32,6 +32,14 @@ enum WorkspaceRunner {
         }
     }
 
+    /// Start a single workspace action again — used to restart a service the user
+    /// stopped without touching the rest of the workspace. `runCommand`'s idempotency
+    /// guard still prevents double-starting one that's somehow already live.
+    static func launchAction(_ actionID: UUID, in workspace: Workspace) {
+        guard let action = workspace.actions.first(where: { $0.id == actionID }) else { return }
+        Task { await runCommand(action, workspace: workspace) }
+    }
+
     private static func run(_ workspace: Workspace, skippingOpens: Bool = false) async {
         for action in workspace.actions where action.enabled {
             switch action.type {

@@ -18,11 +18,36 @@ final class ProcessManager {
     /// Workspace id → its running tracked processes, in start order.
     private(set) var running: [UUID: [ManagedProcess]] = [:]
 
+    /// Workspace id → services the user stopped this session, in stop order. Kept so the
+    /// menu can offer to start them again instead of having them vanish; cleared once the
+    /// action runs again (see `register`). Runtime-only, like `running`.
+    private(set) var stopped: [UUID: [StoppedService]] = [:]
+
+    /// A tracked service the user stopped — just enough to re-run its action and label it.
+    struct StoppedService: Identifiable {
+        /// The originating action's id (unique per workspace), so restart maps back to it.
+        let id: UUID
+        let label: String
+    }
+
+    /// Process ids being stopped as part of a "Stop All" teardown, so their exit is a
+    /// full removal rather than a restartable entry (see `handleExit`).
+    @ObservationIgnored private var tearingDown: Set<UUID> = []
+
     private init() {}
 
     // MARK: - Queries
 
     func services(for workspaceID: UUID) -> [ManagedProcess] { running[workspaceID] ?? [] }
+
+    /// Services the user stopped in this workspace, offered as restartable entries.
+    func stoppedServices(for workspaceID: UUID) -> [StoppedService] { stopped[workspaceID] ?? [] }
+
+    /// Whether the workspace has anything to show in its submenu: live processes or
+    /// user-stopped services waiting to be started again.
+    func hasServices(_ workspaceID: UUID) -> Bool {
+        isRunning(workspaceID) || !(stopped[workspaceID]?.isEmpty ?? true)
+    }
 
     func isRunning(_ workspaceID: UUID) -> Bool { !(running[workspaceID]?.isEmpty ?? true) }
 
@@ -42,6 +67,8 @@ final class ProcessManager {
 
     /// Track a started process and remove it automatically when it exits.
     func register(_ process: ManagedProcess, workspace workspaceID: UUID) {
+        // Starting (or restarting) this action clears any "stopped" entry it left behind.
+        clearStopped(actionID: process.actionID, in: workspaceID)
         process.onExit = { [weak self] userInitiated, status in
             self?.handleExit(process, workspace: workspaceID, userInitiated: userInitiated, status: status)
         }
@@ -54,8 +81,15 @@ final class ProcessManager {
         running[workspaceID]?.first { $0.id == processID }?.stop()
     }
 
+    /// Full teardown for the user's "Stop All": stop every live service and forget the
+    /// restartable entries too, so the workspace drops out of the submenu and collapses
+    /// back to a single launch button. Torn-down exits are silent — no "Start …" entry
+    /// and no crash notification (see `handleExit`).
     func stopAll(in workspaceID: UUID) {
-        (running[workspaceID] ?? []).forEach { $0.stop() }
+        stopped[workspaceID] = nil
+        let services = running[workspaceID] ?? []
+        for service in services { tearingDown.insert(service.id) }
+        services.forEach { $0.stop() }
     }
 
     /// Stop every tracked process in a workspace and suspend until they've all actually
@@ -90,6 +124,15 @@ final class ProcessManager {
         running[workspaceID]?.removeAll { $0.id == process.id }
         if running[workspaceID]?.isEmpty == true { running[workspaceID] = nil }
 
+        // A "Stop All" teardown removes the service outright — no restartable entry and no
+        // crash notice — so the workspace can collapse back to its launch button.
+        if tearingDown.remove(process.id) != nil { return }
+
+        // Otherwise keep the service listed as a restartable entry rather than dropping it,
+        // whether the user stopped it or it exited on its own — the menu turns it into a
+        // "Start …" button. An unexpected exit additionally raises a crash notification.
+        recordStopped(process, in: workspaceID)
+
         guard !userInitiated else { return }
         var detail = ""
         if case .exited(let code) = status, code != 0 { detail = " (exit \(code))" }
@@ -98,5 +141,23 @@ final class ProcessManager {
             body: "A process in \(process.workspaceName) stopped unexpectedly\(detail).",
             logURL: process.logURL
         )
+    }
+
+    // MARK: - Stopped registry
+
+    /// Remember a user-stopped service so the menu can offer to start it again. Replaces
+    /// any prior entry for the same action, keeping it at the end in most-recent order.
+    private func recordStopped(_ process: ManagedProcess, in workspaceID: UUID) {
+        var list = stopped[workspaceID] ?? []
+        list.removeAll { $0.id == process.actionID }
+        list.append(StoppedService(id: process.actionID, label: process.label))
+        stopped[workspaceID] = list
+    }
+
+    /// Drop the stopped entry for an action once it's running again.
+    private func clearStopped(actionID: UUID, in workspaceID: UUID) {
+        guard stopped[workspaceID] != nil else { return }
+        stopped[workspaceID]?.removeAll { $0.id == actionID }
+        if stopped[workspaceID]?.isEmpty == true { stopped[workspaceID] = nil }
     }
 }

@@ -98,11 +98,13 @@ fi
 rm -rf "$BUILD_DIR"
 mkdir -p "$BUILD_DIR"
 
-# A fresh CI runner has no cached provisioning profiles, so automatic signing
-# must create/download them from the portal via the App Store Connect API key.
-# (The key needs App Manager access to manage profiles.) Locally the profiles
-# are already cached, so these args are a harmless no-op. Only added when the
-# ASC key is present — local SKIP_NOTARIZE smoke tests run without it.
+# Passed to the export step so a fresh CI runner can resolve provisioning inputs
+# from the portal via the App Store Connect API key if needed. (The key needs App
+# Manager access.) Locally these are a harmless no-op. Only added when the ASC key
+# is present — local SKIP_NOTARIZE smoke tests run without it. The archive step
+# below deliberately does NOT use these: it signs manually with Developer ID, so
+# it never asks the API to create a development certificate (which, on ephemeral
+# runners, minted a fresh cert every run until the account hit Apple's cert cap).
 PROVISION_ARGS=()
 if [ -n "${ASC_API_KEY_PATH:-}" ] && [ -n "${ASC_API_KEY_ID:-}" ] && [ -n "${ASC_API_ISSUER_ID:-}" ]; then
   PROVISION_ARGS=(
@@ -114,14 +116,23 @@ if [ -n "${ASC_API_KEY_PATH:-}" ] && [ -n "${ASC_API_KEY_ID:-}" ] && [ -n "${ASC
 fi
 
 log "Archiving…"
+# Sign the archive directly with the Developer ID Application certificate using
+# MANUAL signing — the same identity the export step uses, and the one the
+# workflow imports into the CI keychain. This avoids automatic signing, which
+# demanded a "Mac Development" certificate and minted a fresh one via
+# -allowProvisioningUpdates on every ephemeral runner until the account hit
+# Apple's certificate limit. The App Sandbox / App Group entitlements here do not
+# require a provisioning profile for Developer ID distribution on macOS, so none
+# is embedded (PROVISIONING_PROFILE_SPECIFIER="").
 xcodebuild archive \
   -project "$PROJECT" \
   -scheme "$SCHEME" \
   -configuration "$CONFIGURATION" \
   -archivePath "$ARCHIVE_PATH" \
   -destination 'generic/platform=macOS' \
-  CODE_SIGN_STYLE=Automatic \
-  ${PROVISION_ARGS[@]+"${PROVISION_ARGS[@]}"}
+  CODE_SIGN_STYLE=Manual \
+  CODE_SIGN_IDENTITY="Developer ID Application" \
+  PROVISIONING_PROFILE_SPECIFIER=""
 
 log "Exporting (Developer ID)…"
 xcodebuild -exportArchive \

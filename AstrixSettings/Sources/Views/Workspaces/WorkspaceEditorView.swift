@@ -19,9 +19,14 @@ struct WorkspaceEditorView: View {
     @State private var showingIconPicker = false
     @State private var showingDeleteConfirmation = false
 
+    /// Whether this workspace already exists in the store. A brand-new workspace being
+    /// added can't be deleted yet — the "Delete Workspace" option only shows when editing.
+    private let isExisting: Bool
+
     init(store: WorkspacesStore, workspace: Workspace) {
         self.store = store
         _draft = State(initialValue: workspace)
+        self.isExisting = store.workspaces.contains { $0.id == workspace.id }
     }
 
     var body: some View {
@@ -42,7 +47,9 @@ struct WorkspaceEditorView: View {
                     }
 
                     addActionSection
-                    manageSection
+                    if isExisting {
+                        manageSection
+                    }
                 }
                 .padding(20)
                 .frame(maxWidth: .infinity, alignment: .leading)
