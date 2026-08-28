@@ -11,6 +11,9 @@
 //    astrix://launch?id=<uuid>      — launch a workspace by id (stable, survives renames)
 //    astrix://launch?name=<name>    — launch a workspace by name (URL-encoded)
 //
+//  Both accept an optional `&launch=<name>` to pick one of the workspace's launch
+//  configurations; without it the workspace's first launch runs.
+//
 
 import Foundation
 
@@ -35,14 +38,15 @@ enum AstrixURL {
 
     private static func handleLaunch(_ url: URL) {
         let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        let launchNamed = items.first { $0.name == "launch" }?.value
         if let raw = items.first(where: { $0.name == "id" })?.value,
            let id = UUID(uuidString: raw) {
-            try? WorkspaceControl.launch(id: id)
+            try? WorkspaceControl.launch(id: id, launchNamed: launchNamed)
             return
         }
         if let name = items.first(where: { $0.name == "name" })?.value,
            !name.isEmpty {
-            try? WorkspaceControl.launch(name: name)
+            try? WorkspaceControl.launch(name: name, launchNamed: launchNamed)
         }
     }
 }

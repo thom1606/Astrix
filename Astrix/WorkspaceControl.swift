@@ -16,15 +16,16 @@ import Foundation
 enum WorkspaceControl {
     enum LaunchError: Error { case notFound }
 
-    /// Launch the workspace with this exact id. Returns the workspace that ran, or
-    /// throws `.notFound` if the id doesn't match any saved workspace (e.g. it was
-    /// deleted after a Shortcut was recorded).
+    /// Launch the workspace with this exact id. `launchNamed` picks one of its launch
+    /// configurations by name; without it the first one runs. Returns the workspace that
+    /// ran, or throws `.notFound` if nothing matches (e.g. it was deleted after a
+    /// Shortcut was recorded).
     @discardableResult
-    static func launch(id: UUID) throws -> Workspace {
+    static func launch(id: UUID, launchNamed: String? = nil) throws -> Workspace {
         guard let workspace = SharedSettings.workspaces.first(where: { $0.id == id }) else {
             throw LaunchError.notFound
         }
-        WorkspaceRunner.launch(workspace)
+        try run(workspace, launchNamed: launchNamed)
         return workspace
     }
 
@@ -32,13 +33,30 @@ enum WorkspaceControl {
     /// Prefers an exact `displayName` match, then falls back to a unique substring
     /// match so "acme" finds "Acme API". Throws `.notFound` if nothing matches.
     @discardableResult
-    static func launch(name: String) throws -> Workspace {
-        let needle = name.trimmingCharacters(in: .whitespacesAndNewlines)
+    static func launch(name: String, launchNamed: String? = nil) throws -> Workspace {
         let all = SharedSettings.workspaces
-        let match = all.first { $0.displayName.caseInsensitiveCompare(needle) == .orderedSame }
-            ?? all.first { $0.displayName.localizedCaseInsensitiveContains(needle) }
-        guard let workspace = match else { throw LaunchError.notFound }
-        WorkspaceRunner.launch(workspace)
+        guard let workspace = match(name, in: all, by: \.displayName) else { throw LaunchError.notFound }
+        try run(workspace, launchNamed: launchNamed)
         return workspace
+    }
+
+    /// Run one of the workspace's launch configurations — the named one, or the first.
+    private static func run(_ workspace: Workspace, launchNamed: String?) throws {
+        let launch: Launch?
+        if let launchNamed, !launchNamed.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            launch = match(launchNamed, in: workspace.launches, by: \.displayName)
+        } else {
+            launch = workspace.launches.first
+        }
+        guard let launch else { throw LaunchError.notFound }
+        WorkspaceRunner.launch(launch, in: workspace)
+    }
+
+    /// Name lookup tolerant of case and surrounding whitespace: an exact match first,
+    /// then a substring match so "acme" finds "Acme API".
+    private static func match<T>(_ name: String, in items: [T], by key: KeyPath<T, String>) -> T? {
+        let needle = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        return items.first { $0[keyPath: key].caseInsensitiveCompare(needle) == .orderedSame }
+            ?? items.first { $0[keyPath: key].localizedCaseInsensitiveContains(needle) }
     }
 }

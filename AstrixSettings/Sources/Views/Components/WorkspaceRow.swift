@@ -3,7 +3,7 @@
 //  AstrixSettings
 //
 //  A single tappable workspace row for the Workspaces tab: the workspace's icon,
-//  its name, and an action count, with a trailing chevron. Tapping it edits the
+//  its name, and its launch/action counts, with a trailing chevron. Tapping it edits the
 //  workspace; the context menu reorders or deletes it. Designed to live inside a
 //  `SettingsSection`.
 //
@@ -28,7 +28,7 @@ struct WorkspaceRow: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(workspace.displayName)
                         .fontWeight(.medium)
-                    Text(actionCount)
+                    Text(subtitle)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -57,7 +57,12 @@ struct WorkspaceRow: View {
         }
     }
 
-    private var actionCount: String {
-        workspace.actions.count == 1 ? "1 action" : "\(workspace.actions.count) actions"
+    /// "3 launches · 7 actions" — enough to tell workspaces apart at a glance.
+    private var subtitle: String {
+        let launches = workspace.launches.count
+        let actions = workspace.launches.reduce(0) { $0 + $1.actions.count }
+        let launchText = launches == 1 ? "1 launch" : "\(launches) launches"
+        let actionText = actions == 1 ? "1 action" : "\(actions) actions"
+        return "\(launchText) · \(actionText)"
     }
 }

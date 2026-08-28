@@ -12,18 +12,20 @@
 import AppKit
 
 enum WorkspaceLauncher {
-    /// Perform one of the open/browse actions. Command actions are a no-op here — the
-    /// runner spawns and tracks those.
-    static func performOpen(_ action: WorkspaceAction) {
+    /// Perform one of the open/browse actions. `folder` is the owning workspace's
+    /// folder, used for actions that leave their own path blank. Command actions are a
+    /// no-op here — the runner spawns and tracks those.
+    static func performOpen(_ action: WorkspaceAction, folder: String) {
+        let path = action.resolvedPath(folder: folder)
         switch action.type {
         case .openInDefaultEditor:
-            open(path: action.path, in: SharedSettings.defaultEditor)
+            open(path: path, in: SharedSettings.defaultEditor)
         case .openInEditor:
-            open(path: action.path, in: action.resolvedApp ?? .none)
+            open(path: path, in: action.resolvedApp ?? .none)
         case .openInDefaultTerminal:
-            open(path: action.path, in: SharedSettings.defaultTerminal)
+            open(path: path, in: SharedSettings.defaultTerminal)
         case .openInTerminal:
-            open(path: action.path, in: action.resolvedApp ?? .none)
+            open(path: path, in: action.resolvedApp ?? .none)
         case .openInBrowser:
             openBrowser(action.url)
         case .runCommand, .waitSeconds, .waitForPort, .killPort:
@@ -36,7 +38,7 @@ enum WorkspaceLauncher {
     /// Open a filesystem path in the given app. Apps that ship a CLI (cmux) are
     /// launched through it; everything else goes via Launch Services (the native
     /// equivalent of `open -b <bundle-id> <path>`).
-    private static func open(path: String, in app: SupportedApps) {
+    static func open(path: String, in app: SupportedApps) {
         let trimmed = path.trimmingCharacters(in: .whitespacesAndNewlines)
         guard app != .none, !trimmed.isEmpty,
               let appURL = NSWorkspace.shared.urlForApplication(withBundleIdentifier: app.rawValue) else {
