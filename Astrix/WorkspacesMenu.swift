@@ -2,11 +2,12 @@
 //  WorkspacesMenu.swift
 //  Astrix
 //
-//  The workspace entries in the menu bar. Every workspace is a submenu: its launch
-//  configurations at the top (a start button, or a nested menu of running services once
-//  started), then the folder actions (open in editor / terminal / Finder, copy path),
-//  and always Open Logs at the bottom. Reads the live `ProcessManager`, so the menu
-//  reflects what's actually running each time it opens.
+//  The workspace entries in the menu bar. Every workspace is a submenu: its non-empty
+//  launch configurations at the top (a start button, or a nested menu of running
+//  services once started), then the folder actions (open in editor / terminal / Finder,
+//  copy path), and always Open Logs at the bottom — so a workspace with no launches at
+//  all is still a handy way to open a project folder. Reads the live `ProcessManager`,
+//  so the menu reflects what's actually running each time it opens.
 //
 
 import SwiftUI
@@ -20,35 +21,47 @@ struct WorkspacesMenu: View {
 
     var body: some View {
         ForEach(workspaces) { workspace in
-            Menu {
-                ForEach(workspace.launches) { launch in
-                    if processes.hasServices(launch.id) {
-                        runningMenu(launch, in: workspace)
-                    } else {
-                        Button {
-                            WorkspaceRunner.launch(launch, in: workspace)
-                        } label: {
-                            Label(launch.displayName, systemImage: "play.fill")
-                        }
+            workspaceMenu(workspace)
+        }
+    }
+
+    @ViewBuilder
+    private func workspaceMenu(_ workspace: Workspace) -> some View {
+        let launches = runnableLaunches(workspace)
+        Menu {
+            ForEach(launches) { launch in
+                if processes.hasServices(launch.id) {
+                    runningMenu(launch, in: workspace)
+                } else {
+                    Button {
+                        WorkspaceRunner.launch(launch, in: workspace)
+                    } label: {
+                        Label(launch.displayName, systemImage: "play.fill")
                     }
                 }
-
-                if workspace.folderURL != nil {
-                    Divider()
-                    folderActions(workspace)
-                }
-
-                Divider()
-
-                Button {
-                    openLogs(workspace)
-                } label: {
-                    Label("Open Logs", systemImage: "doc.plaintext")
-                }
-            } label: {
-                Label(title(workspace), systemImage: workspace.icon)
             }
+            if !launches.isEmpty { Divider() }
+
+            if workspace.folderURL != nil {
+                folderActions(workspace)
+                Divider()
+            }
+
+            Button {
+                openLogs(workspace)
+            } label: {
+                Label("Open Logs", systemImage: "doc.plaintext")
+            }
+        } label: {
+            Label(title(workspace), systemImage: workspace.icon)
         }
+    }
+
+    /// The launches worth listing. An empty one does nothing when clicked, so it's
+    /// hidden — a workspace can be just a folder you open from the menu bar. One that
+    /// still has processes stays listed regardless, so they never become unstoppable.
+    private func runnableLaunches(_ workspace: Workspace) -> [Launch] {
+        workspace.launches.filter { !$0.actions.isEmpty || processes.hasServices($0.id) }
     }
 
     /// A started launch: a submenu with per-process Stop, a Start entry for each service
