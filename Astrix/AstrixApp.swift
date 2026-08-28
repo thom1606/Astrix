@@ -260,10 +260,19 @@ enum SettingsLauncher {
             .deletingLastPathComponent()
             .appendingPathComponent("AstrixSettings.app")
 
-        let settingsAppURL = FileManager.default.fileExists(atPath: embedded.path) ? embedded : sibling
+        // Both candidates are checked: with the menu bar item hidden this is the only
+        // way into Astrix, so an unopenable Settings has to say something rather than
+        // leave the click a silent no-op.
+        let fileManager = FileManager.default
+        guard let settingsAppURL = [embedded, sibling].first(where: { fileManager.fileExists(atPath: $0.path) }) else {
+            NSSound.beep()
+            return
+        }
 
         let configuration = NSWorkspace.OpenConfiguration()
         configuration.activates = true
-        NSWorkspace.shared.openApplication(at: settingsAppURL, configuration: configuration)
+        NSWorkspace.shared.openApplication(at: settingsAppURL, configuration: configuration) { _, error in
+            if error != nil { NSSound.beep() }
+        }
     }
 }

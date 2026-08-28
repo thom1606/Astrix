@@ -27,7 +27,7 @@ struct CommandActionFields: View {
         }
         .frame(maxWidth: .infinity, alignment: .leading)
 
-        PathField(label: "Working Directory", placeholder: "Optional", path: $action.path)
+        PathField(label: "Working Directory", placeholder: "Workspace folder", path: $action.path)
 
         SettingsToggleRow("Wait for exit", isOn: $action.waitForExit)
 

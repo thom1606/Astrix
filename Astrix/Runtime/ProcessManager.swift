@@ -2,9 +2,9 @@
 //  ProcessManager.swift
 //  Astrix
 //
-//  The live registry of tracked workspace processes, keyed by workspace. Held in the
-//  main app's memory (PIDs are runtime-only and only this process owns them) and
-//  observed directly by the menu bar for live running-state. Main app only.
+//  The live registry of tracked workspace processes, keyed by launch configuration.
+//  Held in the main app's memory (PIDs are runtime-only and only this process owns
+//  them) and observed directly by the menu bar for live running-state. Main app only.
 //
 
 import Foundation
@@ -15,17 +15,17 @@ import Observation
 final class ProcessManager {
     static let shared = ProcessManager()
 
-    /// Workspace id → its running tracked processes, in start order.
+    /// Launch id → its running tracked processes, in start order.
     private(set) var running: [UUID: [ManagedProcess]] = [:]
 
-    /// Workspace id → services the user stopped this session, in stop order. Kept so the
+    /// Launch id → services the user stopped this session, in stop order. Kept so the
     /// menu can offer to start them again instead of having them vanish; cleared once the
     /// action runs again (see `register`). Runtime-only, like `running`.
     private(set) var stopped: [UUID: [StoppedService]] = [:]
 
     /// A tracked service the user stopped — just enough to re-run its action and label it.
     struct StoppedService: Identifiable {
-        /// The originating action's id (unique per workspace), so restart maps back to it.
+        /// The originating action's id (unique per launch), so restart maps back to it.
         let id: UUID
         let label: String
     }
@@ -38,66 +38,66 @@ final class ProcessManager {
 
     // MARK: - Queries
 
-    func services(for workspaceID: UUID) -> [ManagedProcess] { running[workspaceID] ?? [] }
+    func services(for launchID: UUID) -> [ManagedProcess] { running[launchID] ?? [] }
 
-    /// Services the user stopped in this workspace, offered as restartable entries.
-    func stoppedServices(for workspaceID: UUID) -> [StoppedService] { stopped[workspaceID] ?? [] }
+    /// Services the user stopped in this launch, offered as restartable entries.
+    func stoppedServices(for launchID: UUID) -> [StoppedService] { stopped[launchID] ?? [] }
 
-    /// Whether the workspace has anything to show in its submenu: live processes or
-    /// user-stopped services waiting to be started again.
-    func hasServices(_ workspaceID: UUID) -> Bool {
-        isRunning(workspaceID) || !(stopped[workspaceID]?.isEmpty ?? true)
+    /// Whether the launch has anything to show: live processes or user-stopped services
+    /// waiting to be started again.
+    func hasServices(_ launchID: UUID) -> Bool {
+        isRunning(launchID) || !(stopped[launchID]?.isEmpty ?? true)
     }
 
-    func isRunning(_ workspaceID: UUID) -> Bool { !(running[workspaceID]?.isEmpty ?? true) }
+    func isRunning(_ launchID: UUID) -> Bool { !(running[launchID]?.isEmpty ?? true) }
 
-    func runningCount(_ workspaceID: UUID) -> Int { running[workspaceID]?.count ?? 0 }
+    func runningCount(_ launchID: UUID) -> Int { running[launchID]?.count ?? 0 }
 
-    /// Whether any workspace has tracked processes (drives the menu-bar icon badge).
+    /// Whether anything at all is running (drives the menu-bar icon badge).
     var hasAnyRunning: Bool { running.values.contains { !$0.isEmpty } }
 
     /// Whether a specific action already has a live process — the runner uses this to
     /// skip re-starting a service that's already up (so re-launching can't double-bind
     /// a port).
-    func isActionRunning(_ actionID: UUID, in workspaceID: UUID) -> Bool {
-        (running[workspaceID] ?? []).contains { $0.actionID == actionID }
+    func isActionRunning(_ actionID: UUID, in launchID: UUID) -> Bool {
+        (running[launchID] ?? []).contains { $0.actionID == actionID }
     }
 
     // MARK: - Registration
 
     /// Track a started process and remove it automatically when it exits.
-    func register(_ process: ManagedProcess, workspace workspaceID: UUID) {
+    func register(_ process: ManagedProcess, launch launchID: UUID) {
         // Starting (or restarting) this action clears any "stopped" entry it left behind.
-        clearStopped(actionID: process.actionID, in: workspaceID)
+        clearStopped(actionID: process.actionID, in: launchID)
         process.onExit = { [weak self] userInitiated, status in
-            self?.handleExit(process, workspace: workspaceID, userInitiated: userInitiated, status: status)
+            self?.handleExit(process, launch: launchID, userInitiated: userInitiated, status: status)
         }
-        running[workspaceID, default: []].append(process)
+        running[launchID, default: []].append(process)
     }
 
     // MARK: - Stopping
 
-    func stop(_ processID: UUID, in workspaceID: UUID) {
-        running[workspaceID]?.first { $0.id == processID }?.stop()
+    func stop(_ processID: UUID, in launchID: UUID) {
+        running[launchID]?.first { $0.id == processID }?.stop()
     }
 
     /// Full teardown for the user's "Stop All": stop every live service and forget the
-    /// restartable entries too, so the workspace drops out of the submenu and collapses
-    /// back to a single launch button. Torn-down exits are silent — no "Start …" entry
-    /// and no crash notification (see `handleExit`).
-    func stopAll(in workspaceID: UUID) {
-        stopped[workspaceID] = nil
-        let services = running[workspaceID] ?? []
+    /// restartable entries too, so the launch collapses back to a single start button.
+    /// Torn-down exits are silent — no "Start …" entry and no crash notification (see
+    /// `handleExit`).
+    func stopAll(in launchID: UUID) {
+        stopped[launchID] = nil
+        let services = running[launchID] ?? []
         for service in services { tearingDown.insert(service.id) }
         services.forEach { $0.stop() }
     }
 
-    /// Stop every tracked process in a workspace and suspend until they've all actually
+    /// Stop every tracked process in a launch and suspend until they've all actually
     /// exited. Restart uses this so the re-run starts from a clean slate: the runner's
     /// idempotency guard won't skip a service that's merely *stopping*, and the freed
     /// port is truly free before the command rebinds it.
-    func stopAllAndWait(in workspaceID: UUID) async {
-        let services = running[workspaceID] ?? []
+    func stopAllAndWait(in launchID: UUID) async {
+        let services = running[launchID] ?? []
         services.forEach { $0.stop() }
         for service in services { await service.waitUntilExit() }
     }
@@ -117,21 +117,21 @@ final class ProcessManager {
 
     private func handleExit(
         _ process: ManagedProcess,
-        workspace workspaceID: UUID,
+        launch launchID: UUID,
         userInitiated: Bool,
         status: ManagedProcess.Status
     ) {
-        running[workspaceID]?.removeAll { $0.id == process.id }
-        if running[workspaceID]?.isEmpty == true { running[workspaceID] = nil }
+        running[launchID]?.removeAll { $0.id == process.id }
+        if running[launchID]?.isEmpty == true { running[launchID] = nil }
 
         // A "Stop All" teardown removes the service outright — no restartable entry and no
-        // crash notice — so the workspace can collapse back to its launch button.
+        // crash notice — so the launch can collapse back to its start button.
         if tearingDown.remove(process.id) != nil { return }
 
         // Otherwise keep the service listed as a restartable entry rather than dropping it,
         // whether the user stopped it or it exited on its own — the menu turns it into a
         // "Start …" button. An unexpected exit additionally raises a crash notification.
-        recordStopped(process, in: workspaceID)
+        recordStopped(process, in: launchID)
 
         guard !userInitiated else { return }
         var detail = ""
@@ -147,17 +147,17 @@ final class ProcessManager {
 
     /// Remember a user-stopped service so the menu can offer to start it again. Replaces
     /// any prior entry for the same action, keeping it at the end in most-recent order.
-    private func recordStopped(_ process: ManagedProcess, in workspaceID: UUID) {
-        var list = stopped[workspaceID] ?? []
+    private func recordStopped(_ process: ManagedProcess, in launchID: UUID) {
+        var list = stopped[launchID] ?? []
         list.removeAll { $0.id == process.actionID }
         list.append(StoppedService(id: process.actionID, label: process.label))
-        stopped[workspaceID] = list
+        stopped[launchID] = list
     }
 
     /// Drop the stopped entry for an action once it's running again.
-    private func clearStopped(actionID: UUID, in workspaceID: UUID) {
-        guard stopped[workspaceID] != nil else { return }
-        stopped[workspaceID]?.removeAll { $0.id == actionID }
-        if stopped[workspaceID]?.isEmpty == true { stopped[workspaceID] = nil }
+    private func clearStopped(actionID: UUID, in launchID: UUID) {
+        guard stopped[launchID] != nil else { return }
+        stopped[launchID]?.removeAll { $0.id == actionID }
+        if stopped[launchID]?.isEmpty == true { stopped[launchID] = nil }
     }
 }

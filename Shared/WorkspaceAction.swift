@@ -143,6 +143,13 @@ struct WorkspaceAction: Codable, Identifiable, Hashable {
     /// command that isn't waited on (`waitForExit` off).
     var isTrackedService: Bool { type == .runCommand && !waitForExit }
 
+    /// The path this action operates on: its own when set, otherwise the workspace's
+    /// folder. Lets an action say "open the project" without repeating the path.
+    func resolvedPath(folder: String) -> String {
+        let trimmed = path.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? folder : trimmed
+    }
+
     /// The name to show for a running service: the user's label, else the command.
     var resolvedLabel: String {
         let trimmed = label.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -186,7 +193,7 @@ struct WorkspaceAction: Codable, Identifiable, Hashable {
         case .waitForPort, .killPort:
             return port == 0 ? "" : "Port \(port)"
         default:
-            return path
+            return path.isEmpty ? "Workspace folder" : path
         }
     }
 

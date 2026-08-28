@@ -27,7 +27,7 @@ struct OpenActionFields: View {
             }
         }
 
-        PathField(label: "Path", placeholder: "Choose a path…", path: $action.path)
+        PathField(label: "Path", placeholder: "Workspace folder", path: $action.path)
     }
 
     private var appChoices: [SupportedApps] {

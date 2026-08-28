@@ -2,10 +2,12 @@
 //  WorkspacesMenu.swift
 //  Astrix
 //
-//  The workspace entries in the menu bar. A workspace that isn't running is a single
-//  launch button; once it has tracked processes it becomes a submenu listing each
-//  running process with Stop / Stop All / Restart / Open Logs. Reads the live
-//  `ProcessManager`, so the menu reflects what's actually running each time it opens.
+//  The workspace entries in the menu bar. Every workspace is a submenu: its non-empty
+//  launch configurations at the top (a start button, or a nested menu of running
+//  services once started), then the folder actions (open in editor / terminal / Finder,
+//  copy path), and always Open Logs at the bottom — so a workspace with no launches at
+//  all is still a handy way to open a project folder. Reads the live `ProcessManager`,
+//  so the menu reflects what's actually running each time it opens.
 //
 
 import SwiftUI
@@ -19,35 +21,66 @@ struct WorkspacesMenu: View {
 
     var body: some View {
         ForEach(workspaces) { workspace in
-            if processes.hasServices(workspace.id) {
-                runningMenu(workspace)
-            } else {
-                Button {
-                    WorkspaceRunner.launch(workspace)
-                } label: {
-                    Label(workspace.displayName, systemImage: workspace.icon)
-                }
-            }
+            workspaceMenu(workspace)
         }
     }
 
-    /// A launched workspace: a submenu with per-process Stop, a Start entry for each
-    /// service the user stopped, plus Stop All, Restart, and Open Logs.
     @ViewBuilder
-    private func runningMenu(_ workspace: Workspace) -> some View {
-        let services = processes.services(for: workspace.id)
-        let stoppedServices = processes.stoppedServices(for: workspace.id)
+    private func workspaceMenu(_ workspace: Workspace) -> some View {
+        let launches = runnableLaunches(workspace)
+        Menu {
+            ForEach(launches) { launch in
+                if processes.hasServices(launch.id) {
+                    runningMenu(launch, in: workspace)
+                } else {
+                    Button {
+                        WorkspaceRunner.launch(launch, in: workspace)
+                    } label: {
+                        Label(launch.displayName, systemImage: "play.fill")
+                    }
+                }
+            }
+            if !launches.isEmpty { Divider() }
+
+            if workspace.folderURL != nil {
+                folderActions(workspace)
+                Divider()
+            }
+
+            Button {
+                openLogs(workspace)
+            } label: {
+                Label("Open Logs", systemImage: "doc.plaintext")
+            }
+        } label: {
+            Label(title(workspace), systemImage: workspace.icon)
+        }
+    }
+
+    /// The launches worth listing. An empty one does nothing when clicked, so it's
+    /// hidden — a workspace can be just a folder you open from the menu bar. One that
+    /// still has processes stays listed regardless, so they never become unstoppable.
+    private func runnableLaunches(_ workspace: Workspace) -> [Launch] {
+        workspace.launches.filter { !$0.actions.isEmpty || processes.hasServices($0.id) }
+    }
+
+    /// A started launch: a submenu with per-process Stop, a Start entry for each service
+    /// the user stopped, plus Stop All and Restart.
+    @ViewBuilder
+    private func runningMenu(_ launch: Launch, in workspace: Workspace) -> some View {
+        let services = processes.services(for: launch.id)
+        let stoppedServices = processes.stoppedServices(for: launch.id)
         Menu {
             ForEach(services) { service in
                 Button {
-                    processes.stop(service.id, in: workspace.id)
+                    processes.stop(service.id, in: launch.id)
                 } label: {
                     Label("Stop \(menuLabel(service.label))", systemImage: "stop.circle")
                 }
             }
             ForEach(stoppedServices) { service in
                 Button {
-                    WorkspaceRunner.launchAction(service.id, in: workspace)
+                    WorkspaceRunner.launchAction(service.id, in: launch, workspace: workspace)
                 } label: {
                     Label("Start \(menuLabel(service.label))", systemImage: "play.circle")
                 }
@@ -57,10 +90,10 @@ struct WorkspacesMenu: View {
 
             Button {
                 let hadRunning = !services.isEmpty
-                processes.stopAll(in: workspace.id)
+                processes.stopAll(in: launch.id)
                 if hadRunning {
                     NotificationManager.notify(
-                        title: "\(workspace.displayName) stopped",
+                        title: "\(launch.displayName) stopped",
                         body: "All processes have been ended."
                     )
                 }
@@ -68,29 +101,61 @@ struct WorkspacesMenu: View {
                 Label("Stop All", systemImage: "stop.fill")
             }
             Button {
-                WorkspaceRunner.restart(workspace)
+                WorkspaceRunner.restart(launch, in: workspace)
             } label: {
                 Label("Restart", systemImage: "arrow.clockwise")
             }
-
-            Divider()
-
-            Button {
-                openLogs(workspace)
-            } label: {
-                Label("Open Logs", systemImage: "doc.plaintext")
-            }
         } label: {
-            Label(submenuTitle(workspace, runningCount: services.count), systemImage: workspace.icon)
+            Label(launchTitle(launch, runningCount: services.count), systemImage: "play.fill")
+        }
+    }
+
+    /// What you can do with the workspace's folder — the same set the Finder extension
+    /// offers, resolved against the user's default editor/terminal.
+    @ViewBuilder
+    private func folderActions(_ workspace: Workspace) -> some View {
+        let path = workspace.folderURL?.path ?? ""
+
+        if SharedSettings.defaultEditor != .none {
+            Button {
+                WorkspaceLauncher.open(path: path, in: SharedSettings.defaultEditor)
+            } label: {
+                Label("Open in Editor", systemImage: "chevron.left.forwardslash.chevron.right")
+            }
+        }
+        if SharedSettings.defaultTerminal != .none {
+            Button {
+                WorkspaceLauncher.open(path: path, in: SharedSettings.defaultTerminal)
+            } label: {
+                Label("Open in Terminal", systemImage: "terminal")
+            }
+        }
+        Button {
+            NSWorkspace.shared.activateFileViewerSelecting([URL(fileURLWithPath: path)])
+        } label: {
+            Label("Reveal in Finder", systemImage: "folder")
+        }
+        Button {
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(path, forType: .string)
+        } label: {
+            Label("Copy Path", systemImage: "doc.on.doc")
         }
     }
 
     // MARK: - Helpers
 
-    /// Submenu title: append the live count while something is running, otherwise just
-    /// the workspace name (its stopped services are listed inside as Start entries).
-    private func submenuTitle(_ workspace: Workspace, runningCount: Int) -> String {
-        runningCount > 0 ? "\(workspace.displayName) (\(runningCount) running)" : workspace.displayName
+    /// Workspace title: append the live process count across all its launches while
+    /// anything is running.
+    private func title(_ workspace: Workspace) -> String {
+        let running = workspace.launches.reduce(0) { $0 + processes.runningCount($1.id) }
+        return running > 0 ? "\(workspace.displayName) (\(running) running)" : workspace.displayName
+    }
+
+    /// Launch submenu title: append its own live count, otherwise just the name (its
+    /// stopped services are listed inside as Start entries).
+    private func launchTitle(_ launch: Launch, runningCount: Int) -> String {
+        runningCount > 0 ? "\(launch.displayName) (\(runningCount) running)" : launch.displayName
     }
 
     /// Collapse a possibly multi-line command into a short single-line menu title.
