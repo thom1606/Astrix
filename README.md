@@ -23,6 +23,7 @@ The application is built using SwiftUI and Swift and is available for macOS 14.0
 
 - Open your current folder in your editor of choice.
 - Open your current folder in your terminal of choice.
+- Open a folder from another app using `astrix://open?kind=editor&path=<URL-encoded absolute folder path>` or `kind=terminal`. Astrix uses your configured default app for the chosen kind.
 - We suggest you to open in editors based on the contents of the folder (XCode, VSCode, Cursor).
 - Open the current folder path.
 

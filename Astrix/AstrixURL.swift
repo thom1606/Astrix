@@ -10,9 +10,11 @@
 //  Supported:
 //    astrix://launch?id=<uuid>      — launch a workspace by id (stable, survives renames)
 //    astrix://launch?name=<name>    — launch a workspace by name (URL-encoded)
+//    astrix://open?kind=editor&path=<absolute folder path>
+//    astrix://open?kind=terminal&path=<absolute folder path>
 //
-//  Both accept an optional `&launch=<name>` to pick one of the workspace's launch
-//  configurations; without it the workspace's first launch runs.
+//  The launch URLs accept an optional `&launch=<name>` to pick one of the
+//  workspace's launch configurations; without it the first launch runs.
 //
 
 import Foundation
@@ -31,6 +33,31 @@ enum AstrixURL {
         switch verb {
         case "launch":
             handleLaunch(url)
+        case "open":
+            handleOpen(url)
+        default:
+            break
+        }
+    }
+
+    private static func handleOpen(_ url: URL) {
+        let items = URLComponents(url: url, resolvingAgainstBaseURL: false)?.queryItems ?? []
+        let kinds = items.filter { $0.name == "kind" }
+        let paths = items.filter { $0.name == "path" }
+        guard kinds.count == 1, paths.count == 1,
+              let kind = kinds.first?.value,
+              let path = paths.first?.value,
+              (path as NSString).isAbsolutePath else { return }
+
+        var isDirectory: ObjCBool = false
+        guard FileManager.default.fileExists(atPath: path, isDirectory: &isDirectory),
+              isDirectory.boolValue else { return }
+
+        switch kind {
+        case "editor":
+            WorkspaceLauncher.open(path: path, in: SharedSettings.defaultEditor)
+        case "terminal":
+            WorkspaceLauncher.open(path: path, in: SharedSettings.defaultTerminal)
         default:
             break
         }
